@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.tictactoe'
+    namespace 'com.skystone1000'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.example.tictactoe"
+        applicationId "com.skystone1000"
         minSdk 21
         targetSdk 35
         versionCode 2

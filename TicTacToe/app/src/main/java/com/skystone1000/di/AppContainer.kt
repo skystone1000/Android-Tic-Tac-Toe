@@ -1,0 +1,32 @@
+package com.skystone1000.di
+
+import android.content.Context
+import androidx.datastore.preferences.preferencesDataStore
+import com.skystone1000.data.settings.SettingsRepository
+import com.skystone1000.data.stats.AppDatabase
+import com.skystone1000.data.stats.StatsRepository
+import com.skystone1000.domain.ai.AiOpponent
+import com.skystone1000.domain.ai.MinimaxAi
+import com.skystone1000.domain.engine.GameEngine
+import com.skystone1000.domain.model.Difficulty
+
+private val Context.dataStore by preferencesDataStore(name = "settings")
+
+/**
+ * Manual dependency container, held by [com.skystone1000.TicTacApp].
+ * Keeps the graph trivial — no DI framework needed for this app.
+ */
+class AppContainer(appContext: Context) {
+
+    val gameEngine: GameEngine = GameEngine()
+
+    val aiFactory: (Difficulty) -> AiOpponent = { difficulty ->
+        MinimaxAi(gameEngine, difficulty)
+    }
+
+    private val database: AppDatabase = AppDatabase.build(appContext)
+
+    val statsRepository: StatsRepository = StatsRepository(database.matchDao())
+
+    val settingsRepository: SettingsRepository = SettingsRepository(appContext.dataStore)
+}
