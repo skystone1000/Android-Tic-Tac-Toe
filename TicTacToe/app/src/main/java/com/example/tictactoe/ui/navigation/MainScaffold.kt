@@ -7,9 +7,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BarChart
 import androidx.compose.material.icons.rounded.Home
@@ -54,6 +57,7 @@ private fun BottomBar(current: HomeTab, onSelect: (HomeTab) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .background(colors.card)
+            .windowInsetsPadding(WindowInsets.navigationBars)
             .padding(horizontal = 8.dp)
             .height(68.dp),
         verticalAlignment = Alignment.CenterVertically,
