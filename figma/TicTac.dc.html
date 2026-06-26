@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0..1&display=swap" rel="stylesheet">
+<meta name="design_doc_mode" content="canvas">
+<style>
+@keyframes ttspin { to { transform: rotate(360deg) } }
+@keyframes ttpop { 0%{ transform:scale(.5); opacity:0 } 60%{ transform:scale(1.1) } 100%{ transform:scale(1); opacity:1 } }
+@keyframes ttfloat { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-9px) } }
+@keyframes ttfall { 0%{ transform:translateY(-30px) rotate(0); opacity:1 } 100%{ transform:translateY(260px) rotate(340deg); opacity:0 } }
+@keyframes ttbreathe { 0%,100%{ transform:scale(1); opacity:.55 } 50%{ transform:scale(1.25); opacity:0 } }
+body { margin:0; font-family:'Hanken Grotesk', sans-serif; }
+.ms { font-family:'Material Symbols Rounded'; font-weight:400; font-style:normal; line-height:1; letter-spacing:normal; text-transform:none; display:inline-block; white-space:nowrap; word-wrap:normal; direction:ltr; -webkit-font-feature-settings:'liga'; -webkit-font-smoothing:antialiased; }
+</style>
+</helmet>
+
+<div style="position:absolute; left:0; top:0; width:1100px;">
+  <div style="font-family:'Space Grotesk'; font-weight:700; font-size:34px; color:#16162A; letter-spacing:-0.5px;">TicTac <span style="color:#4338CA;">— Design System &amp; App</span></div>
+  <div style="font-family:'Hanken Grotesk'; font-size:15px; color:#75758A; margin-top:6px;">Material 3 · Android · portrait · light + dark · playable game screen — pan and zoom to explore</div>
+</div>
+
+<!-- ============ COLOR CARD ============ -->
+<div style="position:absolute; left:0; top:96px; width:880px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#9A9AAE; margin-bottom:10px; text-transform:uppercase; letter-spacing:1.5px;">Color</div>
+  <div style="background:#fff; border-radius:24px; box-shadow:0 1px 3px rgba(20,20,50,.08); padding:30px; box-sizing:border-box;">
+    <div style="display:flex; gap:36px;">
+
+      <!-- Option A -->
+      <div style="flex:1;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+          <span style="font-family:'Space Grotesk'; font-weight:700; font-size:17px; color:#16162A;">Option A</span>
+          <span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#14B8A6; background:#E2F7F4; padding:3px 9px; border-radius:20px;">SELECTED</span>
+        </div>
+        <div style="font-family:'Hanken Grotesk'; font-size:13px; color:#75758A; margin-bottom:18px;">Indigo · Teal · Orange</div>
+
+        <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:10px;">LIGHT</div>
+        <div style="display:flex; gap:14px; margin-bottom:22px;">
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#4338CA;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Primary</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#4338CA</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#14B8A6;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Player X</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#14B8A6</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#F97316;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Player O</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#F97316</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#F1F1F6; border:1px solid #E4E4ED;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Surface</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#F1F1F6</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#16162A;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Ink</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#16162A</div></div>
+        </div>
+
+        <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:10px;">DARK</div>
+        <div style="display:flex; gap:14px; padding:16px; background:#0E0E14; border-radius:16px;">
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#A5B4FC;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Primary</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#A5B4FC</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#2DD4BF;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Player X</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#2DD4BF</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#FB923C;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Player O</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#FB923C</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#23232E; border:1px solid #33333F;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Surface</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#23232E</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#ECECF3;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Ink</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#ECECF3</div></div>
+        </div>
+      </div>
+
+      <!-- Option B -->
+      <div style="flex:1; opacity:.92;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+          <span style="font-family:'Space Grotesk'; font-weight:700; font-size:17px; color:#16162A;">Option B</span>
+          <span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#9A9AAE; background:#F1F1F6; padding:3px 9px; border-radius:20px;">ALTERNATE</span>
+        </div>
+        <div style="font-family:'Hanken Grotesk'; font-size:13px; color:#75758A; margin-bottom:18px;">Deep Indigo · Cyan · Rose</div>
+
+        <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:10px;">LIGHT</div>
+        <div style="display:flex; gap:14px; margin-bottom:22px;">
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#3730A3;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Primary</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#3730A3</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#06B6D4;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Player X</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#06B6D4</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#FB7185;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Player O</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#FB7185</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#EEF1F6; border:1px solid #E4E4ED;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Surface</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#EEF1F6</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#141426;"></div><div style="font-size:9px; color:#75758A; font-weight:600; margin-top:6px;">Ink</div><div style="font-family:monospace; font-size:9px; color:#9A9AAE;">#141426</div></div>
+        </div>
+
+        <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:10px;">DARK</div>
+        <div style="display:flex; gap:14px; padding:16px; background:#0B0F17; border-radius:16px;">
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#A5B4FC;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Primary</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#A5B4FC</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#22D3EE;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Player X</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#22D3EE</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#FDA4AF;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Player O</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#FDA4AF</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#1A2030; border:1px solid #2A3346;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Surface</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#1A2030</div></div>
+          <div style="text-align:left;"><div style="width:50px; height:50px; border-radius:14px; background:#E8ECF4;"></div><div style="font-size:9px; color:#9A9AAE; font-weight:600; margin-top:6px;">Ink</div><div style="font-family:monospace; font-size:9px; color:#75758A;">#E8ECF4</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ TYPOGRAPHY CARD ============ -->
+<div style="position:absolute; left:932px; top:96px; width:520px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#9A9AAE; margin-bottom:10px; text-transform:uppercase; letter-spacing:1.5px;">Typography</div>
+  <div style="background:#fff; border-radius:24px; box-shadow:0 1px 3px rgba(20,20,50,.08); padding:30px; box-sizing:border-box;">
+    <div style="display:flex; gap:14px; margin-bottom:24px;">
+      <div style="flex:1; background:#F4F4F8; border-radius:16px; padding:16px;"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:30px; color:#16162A;">Space Grotesk</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A; margin-top:4px;">Display · scores · numerals</div></div>
+      <div style="flex:1; background:#F4F4F8; border-radius:16px; padding:16px;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:24px; color:#16162A;">Hanken Grotesk</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A; margin-top:4px;">Body · labels · UI</div></div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div style="display:flex; align-items:baseline; gap:14px; border-bottom:1px solid #F1F1F6; padding-bottom:14px;"><span style="font-family:monospace; font-size:10px; color:#9A9AAE; width:78px;">Display / 40</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:40px; color:#16162A; line-height:1;">3 : 1</span></div>
+      <div style="display:flex; align-items:baseline; gap:14px; border-bottom:1px solid #F1F1F6; padding-bottom:14px;"><span style="font-family:monospace; font-size:10px; color:#9A9AAE; width:78px;">H1 / 28</span><span style="font-family:'Space Grotesk'; font-weight:600; font-size:28px; color:#16162A;">Your move</span></div>
+      <div style="display:flex; align-items:baseline; gap:14px; border-bottom:1px solid #F1F1F6; padding-bottom:14px;"><span style="font-family:monospace; font-size:10px; color:#9A9AAE; width:78px;">H2 / 22</span><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:22px; color:#16162A;">Choose a game mode</span></div>
+      <div style="display:flex; align-items:baseline; gap:14px; border-bottom:1px solid #F1F1F6; padding-bottom:14px;"><span style="font-family:monospace; font-size:10px; color:#9A9AAE; width:78px;">Body / 15</span><span style="font-family:'Hanken Grotesk'; font-weight:400; font-size:15px; color:#16162A;">Play against a friend or the AI.</span></div>
+      <div style="display:flex; align-items:baseline; gap:14px; border-bottom:1px solid #F1F1F6; padding-bottom:14px;"><span style="font-family:monospace; font-size:10px; color:#9A9AAE; width:78px;">Button / 15</span><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; color:#4338CA; letter-spacing:.3px;">GET STARTED</span></div>
+      <div style="display:flex; align-items:baseline; gap:14px;"><span style="font-family:monospace; font-size:10px; color:#9A9AAE; width:78px;">Caption / 12</span><span style="font-family:'Hanken Grotesk'; font-weight:500; font-size:12px; color:#75758A; letter-spacing:.4px;">WINS · LOSSES · DRAWS</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SHAPE / ELEVATION CARD ============ -->
+<div style="position:absolute; left:1504px; top:96px; width:440px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#9A9AAE; margin-bottom:10px; text-transform:uppercase; letter-spacing:1.5px;">Shape · Spacing · Elevation</div>
+  <div style="background:#fff; border-radius:24px; box-shadow:0 1px 3px rgba(20,20,50,.08); padding:30px; box-sizing:border-box;">
+    <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:12px;">CORNER RADII</div>
+    <div style="display:flex; gap:14px; margin-bottom:26px;">
+      <div style="text-align:center;"><div style="width:64px; height:64px; background:#EEEDFB; border:1.5px solid #4338CA; border-radius:12px;"></div><div style="font-family:monospace; font-size:10px; color:#75758A; margin-top:6px;">12 chip</div></div>
+      <div style="text-align:center;"><div style="width:64px; height:64px; background:#EEEDFB; border:1.5px solid #4338CA; border-radius:20px;"></div><div style="font-family:monospace; font-size:10px; color:#75758A; margin-top:6px;">20 tile</div></div>
+      <div style="text-align:center;"><div style="width:64px; height:64px; background:#EEEDFB; border:1.5px solid #4338CA; border-radius:24px;"></div><div style="font-family:monospace; font-size:10px; color:#75758A; margin-top:6px;">24 card</div></div>
+      <div style="text-align:center;"><div style="width:64px; height:64px; background:#EEEDFB; border:1.5px solid #4338CA; border-radius:999px;"></div><div style="font-family:monospace; font-size:10px; color:#75758A; margin-top:6px;">full btn</div></div>
+    </div>
+
+    <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:12px;">8PX SPACING GRID</div>
+    <div style="display:flex; align-items:flex-end; gap:8px; margin-bottom:26px;">
+      <div style="width:8px; height:8px; background:#14B8A6; border-radius:3px;"></div>
+      <div style="width:16px; height:16px; background:#14B8A6; border-radius:4px;"></div>
+      <div style="width:24px; height:24px; background:#14B8A6; border-radius:5px;"></div>
+      <div style="width:32px; height:32px; background:#14B8A6; border-radius:6px;"></div>
+      <div style="width:48px; height:48px; background:#14B8A6; border-radius:8px;"></div>
+      <span style="font-family:monospace; font-size:10px; color:#75758A; align-self:center; margin-left:4px;">8·16·24·32·48</span>
+    </div>
+
+    <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:14px;">ELEVATION</div>
+    <div style="display:flex; gap:18px;">
+      <div style="text-align:center;"><div style="width:74px; height:54px; background:#fff; border-radius:14px; box-shadow:0 1px 2px rgba(20,20,50,.10);"></div><div style="font-family:monospace; font-size:10px; color:#75758A; margin-top:8px;">e1</div></div>
+      <div style="text-align:center;"><div style="width:74px; height:54px; background:#fff; border-radius:14px; box-shadow:0 6px 16px -6px rgba(20,20,50,.20);"></div><div style="font-family:monospace; font-size:10px; color:#75758A; margin-top:8px;">e2</div></div>
+      <div style="text-align:center;"><div style="width:74px; height:54px; background:#fff; border-radius:14px; box-shadow:0 18px 40px -12px rgba(67,56,202,.34);"></div><div style="font-family:monospace; font-size:10px; color:#75758A; margin-top:8px;">e3</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ COMPONENT LIBRARY ============ -->
+<div style="position:absolute; left:0; top:744px; width:1944px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#9A9AAE; margin-bottom:10px; text-transform:uppercase; letter-spacing:1.5px;">Component Library</div>
+  <div style="background:#fff; border-radius:24px; box-shadow:0 1px 3px rgba(20,20,50,.08); padding:32px; box-sizing:border-box; display:flex; flex-wrap:wrap; gap:20px;">
+
+    <!-- Buttons -->
+    <div style="background:#F7F7FB; border-radius:18px; padding:22px; width:300px; box-sizing:border-box;">
+      <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:16px;">BUTTONS</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="background:#4338CA; color:#fff; font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; text-align:center; padding:15px; border-radius:16px; box-shadow:0 8px 18px -6px rgba(67,56,202,.5);">Play now</div>
+        <div style="background:#EEEDFB; color:#4338CA; font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; text-align:center; padding:15px; border-radius:16px;">Secondary</div>
+        <div style="background:transparent; color:#4338CA; border:1.5px solid #D8D6F4; font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; text-align:center; padding:13.5px; border-radius:16px;">Outlined</div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <div style="width:48px; height:48px; border-radius:16px; background:#4338CA; color:#fff; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:24px;">add</span></div>
+          <div style="width:48px; height:48px; border-radius:16px; background:#EEEDFB; color:#4338CA; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:24px;">undo</span></div>
+          <div style="width:48px; height:48px; border-radius:16px; background:#F1F1F6; color:#BDBDCB; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:24px;">replay</span></div>
+          <div style="flex:1; background:#F1F1F6; color:#BDBDCB; font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; text-align:center; padding:14px; border-radius:16px;">Disabled</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game tiles -->
+    <div style="background:#F7F7FB; border-radius:18px; padding:22px; width:300px; box-sizing:border-box;">
+      <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:16px;">GAME TILES · STATES</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div style="text-align:center;"><div style="width:64px; height:64px; border-radius:18px; background:#fff; box-shadow:inset 0 0 0 1.5px #EAEAF2;"></div><div style="font-size:9px; color:#75758A; margin-top:6px; font-weight:600;">Empty</div></div>
+        <div style="text-align:center;"><div style="width:64px; height:64px; border-radius:18px; background:#E2F7F4; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:34px; color:#14B8A6;">X</div><div style="font-size:9px; color:#75758A; margin-top:6px; font-weight:600;">X-filled</div></div>
+        <div style="text-align:center;"><div style="width:64px; height:64px; border-radius:18px; background:#FEEEE2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:34px; color:#F97316;">O</div><div style="font-size:9px; color:#75758A; margin-top:6px; font-weight:600;">O-filled</div></div>
+        <div style="text-align:center;"><div style="width:64px; height:64px; border-radius:18px; background:#E2F7F4; box-shadow:inset 0 0 0 2px #14B8A6, 0 6px 16px -4px rgba(20,184,166,.5); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:34px; color:#14B8A6;">X</div><div style="font-size:9px; color:#75758A; margin-top:6px; font-weight:600;">Winning</div></div>
+        <div style="text-align:center;"><div style="width:64px; height:64px; border-radius:18px; background:#F1F1F6; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:34px; color:#CFCFDA;">O</div><div style="font-size:9px; color:#75758A; margin-top:6px; font-weight:600;">Disabled</div></div>
+      </div>
+    </div>
+
+    <!-- Board -->
+    <div style="background:#F7F7FB; border-radius:18px; padding:22px; width:210px; box-sizing:border-box;">
+      <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:16px;">3×3 BOARD</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+        <div style="aspect-ratio:1; border-radius:14px; background:#fff; box-shadow:inset 0 0 0 1.5px #EAEAF2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#14B8A6;">X</div>
+        <div style="aspect-ratio:1; border-radius:14px; background:#fff; box-shadow:inset 0 0 0 1.5px #EAEAF2;"></div>
+        <div style="aspect-ratio:1; border-radius:14px; background:#FEEEE2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#F97316;">O</div>
+        <div style="aspect-ratio:1; border-radius:14px; background:#fff; box-shadow:inset 0 0 0 1.5px #EAEAF2;"></div>
+        <div style="aspect-ratio:1; border-radius:14px; background:#E2F7F4; box-shadow:inset 0 0 0 2px #14B8A6; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#14B8A6;">X</div>
+        <div style="aspect-ratio:1; border-radius:14px; background:#fff; box-shadow:inset 0 0 0 1.5px #EAEAF2;"></div>
+        <div style="aspect-ratio:1; border-radius:14px; background:#FEEEE2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#F97316;">O</div>
+        <div style="aspect-ratio:1; border-radius:14px; background:#fff; box-shadow:inset 0 0 0 1.5px #EAEAF2;"></div>
+        <div style="aspect-ratio:1; border-radius:14px; background:#E2F7F4; box-shadow:inset 0 0 0 2px #14B8A6; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#14B8A6;">X</div>
+      </div>
+    </div>
+
+    <!-- Score + turn -->
+    <div style="background:#F7F7FB; border-radius:18px; padding:22px; width:300px; box-sizing:border-box;">
+      <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:16px;">SCORE CHIPS · TURN</div>
+      <div style="display:flex; gap:10px; margin-bottom:16px;">
+        <div style="flex:1; background:#fff; border-radius:16px; padding:12px 14px; box-shadow:0 1px 2px rgba(20,20,50,.06);"><div style="font-size:10px; color:#75758A; font-weight:600;">Player X</div><div style="display:flex; align-items:center; gap:8px; margin-top:2px;"><span style="font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#14B8A6;">X</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#16162A;">2</span></div></div>
+        <div style="flex:1; background:#fff; border-radius:16px; padding:12px 14px; box-shadow:0 1px 2px rgba(20,20,50,.06);"><div style="font-size:10px; color:#75758A; font-weight:600;">Player O</div><div style="display:flex; align-items:center; gap:8px; margin-top:2px;"><span style="font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#F97316;">O</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#16162A;">1</span></div></div>
+      </div>
+      <div style="background:#E2F7F4; border-radius:14px; padding:11px 16px; display:flex; align-items:center; gap:10px;">
+        <span style="width:10px; height:10px; border-radius:50%; background:#14B8A6; box-shadow:0 0 0 4px rgba(20,184,166,.2);"></span>
+        <span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#0F766E;">X — your turn</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div style="background:#F7F7FB; border-radius:18px; padding:22px; width:300px; box-sizing:border-box;">
+      <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:16px;">CONTROLS</div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:52px; height:30px; border-radius:999px; background:#4338CA; position:relative;"><div style="position:absolute; top:3px; right:3px; width:24px; height:24px; border-radius:50%; background:#fff;"></div></div>
+          <div style="width:52px; height:30px; border-radius:999px; background:#DEDEE8; position:relative;"><div style="position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#fff;"></div></div>
+          <span style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A;">Toggle on / off</span>
+        </div>
+        <div>
+          <div style="height:6px; border-radius:999px; background:#DEDEE8; position:relative;"><div style="position:absolute; left:0; top:0; bottom:0; width:62%; background:#4338CA; border-radius:999px;"></div><div style="position:absolute; left:62%; top:50%; transform:translate(-50%,-50%); width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 2px 6px rgba(67,56,202,.5), 0 0 0 2px #4338CA;"></div></div>
+          <div style="font-family:'Hanken Grotesk'; font-size:11px; color:#75758A; margin-top:10px;">Slider · volume</div>
+        </div>
+        <div style="display:flex; background:#E9E9F1; border-radius:13px; padding:4px;">
+          <div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#75758A; padding:8px;">Easy</div>
+          <div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#4338CA; padding:8px; background:#fff; border-radius:10px; box-shadow:0 1px 3px rgba(20,20,50,.12);">Medium</div>
+          <div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#75758A; padding:8px;">Hard</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- List row + avatars -->
+    <div style="background:#F7F7FB; border-radius:18px; padding:22px; width:300px; box-sizing:border-box;">
+      <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:16px;">LIST ROW · AVATARS</div>
+      <div style="background:#fff; border-radius:14px; padding:12px 14px; display:flex; align-items:center; gap:12px; box-shadow:0 1px 2px rgba(20,20,50,.05); margin-bottom:16px;">
+        <div style="width:40px; height:40px; border-radius:13px; background:linear-gradient(135deg,#14B8A6,#0E9488); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700;">A</div>
+        <div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#16162A;">Vs AI · Hard</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A;">Won · 3:1 · 2m ago</div></div>
+        <span style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#14B8A6; background:#E2F7F4; padding:4px 10px; border-radius:20px;">WIN</span>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#4338CA,#6D5DF0); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700; font-size:15px;">K</div>
+        <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#F97316,#FB923C); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700; font-size:15px;">M</div>
+        <div style="width:40px; height:40px; border-radius:50%; background:#E9E9F1; display:flex; align-items:center; justify-content:center; color:#9A9AAE;"><span class="ms" style="font-size:22px;">person</span></div>
+        <div style="width:40px; height:40px; border-radius:50%; background:#fff; border:1.5px dashed #C9C9D6; display:flex; align-items:center; justify-content:center; color:#9A9AAE;"><span class="ms" style="font-size:20px;">add</span></div>
+      </div>
+    </div>
+
+    <!-- Snackbar + sheet handle -->
+    <div style="background:#F7F7FB; border-radius:18px; padding:22px; width:300px; box-sizing:border-box;">
+      <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:16px;">SNACKBAR · SHEET</div>
+      <div style="background:#16162A; border-radius:14px; padding:13px 16px; display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+        <span class="ms" style="font-size:20px; color:#2DD4BF;">check_circle</span>
+        <span style="flex:1; font-family:'Hanken Grotesk'; font-size:13px; color:#fff;">Move undone</span>
+        <span style="font-family:'Hanken Grotesk'; font-weight:700; font-size:13px; color:#A5B4FC;">REDO</span>
+      </div>
+      <div style="background:#fff; border-radius:18px 18px 0 0; padding:14px 16px 18px; box-shadow:0 -8px 24px -10px rgba(20,20,50,.2);">
+        <div style="width:36px; height:4px; border-radius:999px; background:#DEDEE8; margin:0 auto 14px;"></div>
+        <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#16162A;">Bottom sheet</div>
+        <div style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A; margin-top:2px;">Drag handle · scrim · rounded top</div>
+      </div>
+    </div>
+
+    <!-- Dialog -->
+    <div style="background:#F7F7FB; border-radius:18px; padding:22px; width:300px; box-sizing:border-box;">
+      <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:16px;">DIALOG</div>
+      <div style="background:#fff; border-radius:20px; padding:20px; box-shadow:0 18px 40px -12px rgba(20,20,50,.28);">
+        <div style="font-family:'Space Grotesk'; font-weight:600; font-size:18px; color:#16162A;">Quit match?</div>
+        <div style="font-family:'Hanken Grotesk'; font-size:13px; color:#75758A; margin-top:6px;">Your current progress won't be saved.</div>
+        <div style="display:flex; gap:10px; margin-top:18px;">
+          <div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#4338CA; background:#EEEDFB; padding:11px; border-radius:13px;">Cancel</div>
+          <div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#fff; background:#F97316; padding:11px; border-radius:13px;">Quit</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom nav -->
+    <div style="background:#F7F7FB; border-radius:18px; padding:22px; width:auto; box-sizing:border-box; flex:1; min-width:300px;">
+      <div style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:700; color:#9A9AAE; letter-spacing:1px; margin-bottom:16px;">BOTTOM NAVIGATION</div>
+      <div style="background:#fff; border-radius:18px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 3px rgba(20,20,50,.08); max-width:360px;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 16px; background:#EEEDFB; border-radius:14px;"><span class="ms" style="font-size:24px; color:#4338CA; font-variation-settings:'FILL' 1;">home</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#4338CA;">Home</span></div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 14px;"><span class="ms" style="font-size:24px; color:#9A9AAE;">bar_chart</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#9A9AAE;">Stats</span></div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 14px;"><span class="ms" style="font-size:24px; color:#9A9AAE;">person</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#9A9AAE;">Profile</span></div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 14px;"><span class="ms" style="font-size:24px; color:#9A9AAE;">settings</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#9A9AAE;">Settings</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ============ LIGHT FLOW A ============ -->
+
+<!-- SPLASH -->
+<div style="position:absolute; left:0; top:1820px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">01 · Splash</div>
+  <div style="--bg:#4338CA; --fg:#fff; width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); background:linear-gradient(160deg,#4F3FF0,#3A2FB0);">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#fff;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;">
+      <div style="position:relative; width:140px; height:140px; display:flex; align-items:center; justify-content:center;">
+        <div style="position:absolute; width:140px; height:140px; border-radius:44px; background:rgba(255,255,255,.18); animation:ttbreathe 2.6s ease-out infinite;"></div>
+        <div style="width:104px; height:104px; border-radius:32px; background:#fff; display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:14px; box-sizing:border-box; box-shadow:0 20px 40px -10px rgba(0,0,0,.35); animation:ttpop .6s cubic-bezier(.2,.8,.3,1) both;">
+          <div style="border-radius:11px; background:#E2F7F4; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#14B8A6;">X</div>
+          <div style="border-radius:11px; background:#FEEEE2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#F97316;">O</div>
+          <div style="border-radius:11px; background:#FEEEE2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#F97316;">O</div>
+          <div style="border-radius:11px; background:#E2F7F4; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#14B8A6;">X</div>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Space Grotesk'; font-weight:700; font-size:38px; color:#fff; letter-spacing:-1px;">TicTac</div>
+        <div style="font-family:'Hanken Grotesk'; font-size:14px; color:rgba(255,255,255,.7); margin-top:2px;">three in a row, beautifully</div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:54px; left:0; right:0; display:flex; justify-content:center;"><div style="width:30px; height:30px; border:3px solid rgba(255,255,255,.3); border-top-color:#fff; border-radius:50%; animation:ttspin .9s linear infinite;"></div></div>
+  </div>
+</div>
+
+<!-- ONBOARDING 1 -->
+<div style="position:absolute; left:404px; top:1820px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">02 · Onboarding — Play anywhere</div>
+  <div style="--bg:#F4F4F8; width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#16162A;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="text-align:right; padding:4px 24px;"><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#75758A;">Skip</span></div>
+    <div style="height:300px; display:flex; align-items:center; justify-content:center; position:relative;">
+      <div style="width:200px; height:200px; border-radius:48px; background:linear-gradient(150deg,#EEEDFB,#E2F7F4); display:flex; align-items:center; justify-content:center; position:relative;">
+        <span class="ms" style="font-size:88px; color:#4338CA;">public</span>
+        <div style="position:absolute; top:-12px; left:-12px; width:52px; height:52px; border-radius:18px; background:#fff; box-shadow:0 10px 24px -8px rgba(20,184,166,.6); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#14B8A6; animation:ttfloat 3s ease-in-out infinite;">X</div>
+        <div style="position:absolute; bottom:-10px; right:-14px; width:52px; height:52px; border-radius:18px; background:#fff; box-shadow:0 10px 24px -8px rgba(249,115,22,.6); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:26px; color:#F97316; animation:ttfloat 3s ease-in-out infinite .8s;">O</div>
+      </div>
+    </div>
+    <div style="padding:0 30px; text-align:center;">
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:28px; color:#16162A; letter-spacing:-.5px;">Play anywhere</div>
+      <div style="font-family:'Hanken Grotesk'; font-size:15px; color:#75758A; line-height:1.5; margin-top:10px;">Pick up a quick match on the bus, in line, or on the couch. No setup, no waiting.</div>
+    </div>
+    <div style="position:absolute; bottom:42px; left:0; right:0; padding:0 30px; display:flex; align-items:center; justify-content:space-between;">
+      <div style="display:flex; gap:7px;"><span style="width:22px; height:7px; border-radius:999px; background:#4338CA;"></span><span style="width:7px; height:7px; border-radius:999px; background:#D2D2DE;"></span><span style="width:7px; height:7px; border-radius:999px; background:#D2D2DE;"></span></div>
+      <div style="width:54px; height:54px; border-radius:50%; background:#4338CA; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 22px -6px rgba(67,56,202,.55);"><span class="ms" style="font-size:26px; color:#fff;">arrow_forward</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ONBOARDING 2 -->
+<div style="position:absolute; left:808px; top:1820px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">03 · Onboarding — Friend or AI</div>
+  <div style="--bg:#F4F4F8; width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#16162A;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="text-align:right; padding:4px 24px;"><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#75758A;">Skip</span></div>
+    <div style="height:300px; display:flex; align-items:center; justify-content:center; gap:14px;">
+      <div style="width:96px; height:120px; border-radius:30px; background:#fff; box-shadow:0 14px 30px -12px rgba(20,20,50,.25); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;"><div style="width:54px; height:54px; border-radius:50%; background:linear-gradient(135deg,#14B8A6,#0E9488); display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#fff;">person</span></div><span style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#14B8A6;">X</span></div>
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#9A9AAE; background:#fff; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 14px -6px rgba(20,20,50,.3);">VS</div>
+      <div style="width:96px; height:120px; border-radius:30px; background:#fff; box-shadow:0 14px 30px -12px rgba(20,20,50,.25); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;"><div style="width:54px; height:54px; border-radius:50%; background:linear-gradient(135deg,#F97316,#FB923C); display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#fff;">smart_toy</span></div><span style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#F97316;">O</span></div>
+    </div>
+    <div style="padding:0 30px; text-align:center;">
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:28px; color:#16162A; letter-spacing:-.5px;">Friend or AI</div>
+      <div style="font-family:'Hanken Grotesk'; font-size:15px; color:#75758A; line-height:1.5; margin-top:10px;">Pass &amp; play with a friend, or test yourself against three levels of AI.</div>
+    </div>
+    <div style="position:absolute; bottom:42px; left:0; right:0; padding:0 30px; display:flex; align-items:center; justify-content:space-between;">
+      <div style="display:flex; gap:7px;"><span style="width:7px; height:7px; border-radius:999px; background:#D2D2DE;"></span><span style="width:22px; height:7px; border-radius:999px; background:#4338CA;"></span><span style="width:7px; height:7px; border-radius:999px; background:#D2D2DE;"></span></div>
+      <div style="width:54px; height:54px; border-radius:50%; background:#4338CA; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 22px -6px rgba(67,56,202,.55);"><span class="ms" style="font-size:26px; color:#fff;">arrow_forward</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ONBOARDING 3 -->
+<div style="position:absolute; left:1212px; top:1820px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">04 · Onboarding — Track your wins</div>
+  <div style="--bg:#F4F4F8; width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#16162A;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="height:48px;"></div>
+    <div style="height:280px; display:flex; align-items:flex-end; justify-content:center; gap:14px; padding:0 50px;">
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:8px;"><div style="width:100%; height:90px; border-radius:14px; background:#E2F7F4;"></div><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#75758A;">Mon</span></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:8px;"><div style="width:100%; height:150px; border-radius:14px; background:#4338CA;"></div><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#75758A;">Tue</span></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative;"><div style="position:absolute; top:-46px; width:48px; height:48px; border-radius:16px; background:#fff; box-shadow:0 10px 22px -8px rgba(67,56,202,.5); display:flex; align-items:center; justify-content:center; animation:ttfloat 3s ease-in-out infinite;"><span class="ms" style="font-size:28px; color:#F97316;">emoji_events</span></div><div style="width:100%; height:120px; border-radius:14px; background:#A5B4FC;"></div><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#75758A;">Wed</span></div>
+    </div>
+    <div style="padding:14px 30px 0; text-align:center;">
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:28px; color:#16162A; letter-spacing:-.5px;">Track your wins</div>
+      <div style="font-family:'Hanken Grotesk'; font-size:15px; color:#75758A; line-height:1.5; margin-top:10px;">Build streaks, climb levels, and watch your win-rate grow over time.</div>
+    </div>
+    <div style="position:absolute; bottom:36px; left:0; right:0; padding:0 24px;">
+      <div style="display:flex; justify-content:center; gap:7px; margin-bottom:18px;"><span style="width:7px; height:7px; border-radius:999px; background:#D2D2DE;"></span><span style="width:7px; height:7px; border-radius:999px; background:#D2D2DE;"></span><span style="width:22px; height:7px; border-radius:999px; background:#4338CA;"></span></div>
+      <div style="background:#4338CA; color:#fff; font-family:'Hanken Grotesk'; font-weight:600; font-size:16px; text-align:center; padding:16px; border-radius:18px; box-shadow:0 12px 26px -8px rgba(67,56,202,.55);">Get started</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div style="position:absolute; left:1616px; top:1820px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">05 · Home</div>
+  <div style="--bg:#F4F4F8; width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#16162A;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="padding:8px 22px 80px; box-sizing:border-box; height:696px; overflow:hidden;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+        <div><div style="font-family:'Hanken Grotesk'; font-size:13px; color:#75758A;">Good evening,</div><div style="font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#16162A;">Kai</div></div>
+        <div style="display:flex; gap:10px; align-items:center;"><div style="width:42px; height:42px; border-radius:14px; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(20,20,50,.08);"><span class="ms" style="font-size:22px; color:#75758A;">settings</span></div><div style="width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,#4338CA,#6D5DF0); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700;">K</div></div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#4338CA,#5B4BE8); border-radius:22px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; box-shadow:0 14px 30px -12px rgba(67,56,202,.6);">
+        <div><div style="display:flex; align-items:center; gap:6px;"><span class="ms" style="font-size:18px; color:#FDBA74;">local_fire_department</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#fff;">5</span><span style="font-family:'Hanken Grotesk'; font-size:13px; color:rgba(255,255,255,.8);">day streak</span></div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:rgba(255,255,255,.7); margin-top:6px;">Level 7 · 320 / 500 XP</div><div style="width:150px; height:6px; border-radius:999px; background:rgba(255,255,255,.25); margin-top:7px;"><div style="width:64%; height:6px; border-radius:999px; background:#fff;"></div></div></div>
+        <div style="width:54px; height:54px; border-radius:18px; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#fff;">7</div>
+      </div>
+
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:13px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:12px;">GAME MODES</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="background:#fff; border-radius:20px; padding:16px; display:flex; align-items:center; gap:14px; box-shadow:0 1px 3px rgba(20,20,50,.07);"><div style="width:48px; height:48px; border-radius:15px; background:#E2F7F4; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:26px; color:#14B8A6;">group</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:16px; color:#16162A;">Pass &amp; Play</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A;">2 players · one device</div></div><span class="ms" style="font-size:22px; color:#C5C5D2;">chevron_right</span></div>
+        <div style="background:#fff; border-radius:20px; padding:16px; box-shadow:0 1px 3px rgba(20,20,50,.07);"><div style="display:flex; align-items:center; gap:14px;"><div style="width:48px; height:48px; border-radius:15px; background:#FEEEE2; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:26px; color:#F97316;">smart_toy</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:16px; color:#16162A;">Vs AI</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A;">Pick your challenge</div></div></div><div style="display:flex; background:#F1F1F6; border-radius:12px; padding:4px; margin-top:12px;"><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#75758A; padding:7px;">Easy</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#4338CA; padding:7px; background:#fff; border-radius:9px; box-shadow:0 1px 2px rgba(20,20,50,.1);">Medium</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#75758A; padding:7px;">Hard</div></div></div>
+        <div style="background:#fff; border-radius:20px; padding:16px; display:flex; align-items:center; gap:14px; box-shadow:0 1px 3px rgba(20,20,50,.07);"><div style="width:48px; height:48px; border-radius:15px; background:#EEEDFB; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:26px; color:#4338CA;">bolt</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:16px; color:#16162A;">Quick Match</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A;">Online · find an opponent</div></div><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:700; color:#14B8A6; background:#E2F7F4; padding:4px 9px; border-radius:20px;">LIVE</span></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; right:0; height:68px; background:#fff; border-top:1px solid #EDEDF3; display:flex; justify-content:space-around; align-items:center; padding-bottom:4px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#4338CA; font-variation-settings:'FILL' 1;">home</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#4338CA;">Home</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">bar_chart</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Stats</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">person</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Profile</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">settings</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Settings</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODE SETUP -->
+<div style="position:absolute; left:2020px; top:1820px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">06 · Match setup</div>
+  <div style="--bg:#F4F4F8; width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#16162A;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="display:flex; align-items:center; gap:14px; padding:6px 22px 14px;"><span class="ms" style="font-size:26px; color:#16162A;">arrow_back</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#16162A;">Match setup</span></div>
+    <div style="padding:0 22px;">
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:10px;">YOUR SYMBOL</div>
+      <div style="display:flex; gap:12px; margin-bottom:20px;">
+        <div style="flex:1; height:88px; border-radius:20px; background:#E2F7F4; border:2px solid #14B8A6; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:44px; color:#14B8A6; position:relative;">X<span class="ms" style="position:absolute; top:8px; right:8px; font-size:18px; color:#14B8A6; font-variation-settings:'FILL' 1;">check_circle</span></div>
+        <div style="flex:1; height:88px; border-radius:20px; background:#fff; border:2px solid #EDEDF3; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:44px; color:#F97316;">O</div>
+      </div>
+
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:10px;">DIFFICULTY</div>
+      <div style="display:flex; background:#E9E9F1; border-radius:14px; padding:4px; margin-bottom:20px;"><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#75758A; padding:9px;">Easy</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#75758A; padding:9px;">Medium</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#fff; padding:9px; background:#4338CA; border-radius:11px; box-shadow:0 4px 10px -3px rgba(67,56,202,.5);">Hard</div></div>
+
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:10px;">BOARD THEME</div>
+      <div style="display:flex; gap:12px; margin-bottom:20px;">
+        <div style="width:56px; height:56px; border-radius:16px; background:#fff; border:2px solid #4338CA; display:grid; grid-template-columns:1fr 1fr; gap:3px; padding:8px; box-sizing:border-box;"><div style="background:#E2F7F4; border-radius:4px;"></div><div style="background:#FEEEE2; border-radius:4px;"></div><div style="background:#FEEEE2; border-radius:4px;"></div><div style="background:#E2F7F4; border-radius:4px;"></div></div>
+        <div style="width:56px; height:56px; border-radius:16px; background:#16162A; border:2px solid transparent; display:grid; grid-template-columns:1fr 1fr; gap:3px; padding:8px; box-sizing:border-box;"><div style="background:#2DD4BF; border-radius:4px;"></div><div style="background:#FB923C; border-radius:4px;"></div><div style="background:#FB923C; border-radius:4px;"></div><div style="background:#2DD4BF; border-radius:4px;"></div></div>
+        <div style="width:56px; height:56px; border-radius:16px; background:linear-gradient(135deg,#EEEDFB,#E2F7F4); border:2px solid transparent; display:grid; grid-template-columns:1fr 1fr; gap:3px; padding:8px; box-sizing:border-box;"><div style="background:#fff; border-radius:4px;"></div><div style="background:#fff; border-radius:4px;"></div><div style="background:#fff; border-radius:4px;"></div><div style="background:#fff; border-radius:4px;"></div></div>
+      </div>
+
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:10px;">PLAYERS</div>
+      <div style="background:#fff; border-radius:16px; padding:12px 14px; display:flex; align-items:center; gap:12px; margin-bottom:10px; box-shadow:0 1px 2px rgba(20,20,50,.05);"><div style="width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#4338CA,#6D5DF0); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700;">K</div><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#16162A;">Kai</span><span style="font-family:'Space Grotesk'; font-weight:700; color:#14B8A6;">X</span></div>
+      <div style="background:#fff; border-radius:16px; padding:12px 14px; display:flex; align-items:center; gap:12px; box-shadow:0 1px 2px rgba(20,20,50,.05);"><div style="width:38px; height:38px; border-radius:12px; background:#FEEEE2; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:22px; color:#F97316;">smart_toy</span></div><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#16162A;">AI · Hard</span><span style="font-family:'Space Grotesk'; font-weight:700; color:#F97316;">O</span></div>
+    </div>
+    <div style="position:absolute; bottom:28px; left:22px; right:22px;"><div style="background:#4338CA; color:#fff; font-family:'Hanken Grotesk'; font-weight:600; font-size:16px; text-align:center; padding:16px; border-radius:18px; box-shadow:0 12px 26px -8px rgba(67,56,202,.55); display:flex; align-items:center; justify-content:center; gap:8px;"><span class="ms" style="font-size:22px;">play_arrow</span>Start match</div></div>
+  </div>
+</div>
+<!-- ============ LIGHT FLOW B ============ -->
+
+<!-- GAME (PLAYABLE) -->
+<div style="position:absolute; left:0; top:2740px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#14B8A6; margin-bottom:10px; letter-spacing:.5px;">07 · Game — ▶ PLAYABLE, tap the tiles</div>
+  <div style="--x:#14B8A6; --x-soft:#E2F7F4; --o:#F97316; --o-soft:#FEEEE2; --surface-2:#F1F1F6; width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#16162A;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:4px 22px 12px;"><span class="ms" style="font-size:24px; color:#16162A;">arrow_back</span><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#75758A;">Vs AI · Hard</span><span class="ms" style="font-size:24px; color:#16162A;">more_horiz</span></div>
+
+    <div style="display:flex; align-items:stretch; gap:10px; padding:0 22px; margin-bottom:14px;">
+      <div style="flex:1; background:#E2F7F4; border-radius:18px; padding:12px; text-align:center;"><div style="display:flex; align-items:center; justify-content:center; gap:6px;"><div style="width:26px; height:26px; border-radius:9px; background:linear-gradient(135deg,#4338CA,#6D5DF0); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700; font-size:13px;">K</div><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#0F766E;">Kai</span></div><div style="font-family:'Space Grotesk'; font-weight:700; font-size:30px; color:#14B8A6; margin-top:4px;">{{ scoreX }}</div></div>
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:0 4px;"><span style="font-family:'Space Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE;">VS</span><div style="display:flex; align-items:center; gap:4px; background:#16162A; border-radius:20px; padding:5px 11px;"><span class="ms" style="font-size:14px; color:#fff;">timer</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:13px; color:#fff;">0:12</span></div></div>
+      <div style="flex:1; background:#FEEEE2; border-radius:18px; padding:12px; text-align:center;"><div style="display:flex; align-items:center; justify-content:center; gap:6px;"><div style="width:26px; height:26px; border-radius:9px; background:#FB923C; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:16px; color:#fff;">smart_toy</span></div><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#C2410C;">AI</span></div><div style="font-family:'Space Grotesk'; font-weight:700; font-size:30px; color:#F97316; margin-top:4px;">{{ scoreO }}</div></div>
+    </div>
+
+    <div style="display:flex; justify-content:center; margin-bottom:16px;"><div style="display:flex; align-items:center; gap:9px; background:#fff; border-radius:999px; padding:8px 18px; box-shadow:0 1px 3px rgba(20,20,50,.08);"><span style="width:10px; height:10px; border-radius:50%; background:{{ turnDot }};"></span><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#16162A;">{{ statusText }}</span></div></div>
+
+    <div style="padding:0 26px;">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+        <sc-for list="{{ cells }}" as="c" hint-placeholder-count="9">
+          <div onClick="{{ c.onClick }}" style="aspect-ratio:1; border-radius:20px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; cursor:pointer; user-select:none; transition:transform .12s; background:{{ c.bg }}; color:{{ c.fg }}; box-shadow:inset 0 0 0 1.5px #EAEAF2, {{ c.ring }} inset;">{{ c.mark }}</div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="position:absolute; bottom:30px; left:22px; right:22px; display:flex; gap:12px;">
+      <div style="flex:1; background:#fff; border-radius:16px; padding:13px; display:flex; flex-direction:column; align-items:center; gap:3px; box-shadow:0 1px 3px rgba(20,20,50,.07);"><span class="ms" style="font-size:22px; color:#75758A;">undo</span><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#75758A;">Undo</span></div>
+      <div onClick="{{ reset }}" style="flex:1; background:#EEEDFB; border-radius:16px; padding:13px; display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer;"><span class="ms" style="font-size:22px; color:#4338CA;">replay</span><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#4338CA;">Restart</span></div>
+      <div style="flex:1; background:#fff; border-radius:16px; padding:13px; display:flex; flex-direction:column; align-items:center; gap:3px; box-shadow:0 1px 3px rgba(20,20,50,.07);"><span class="ms" style="font-size:22px; color:#75758A;">close</span><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#75758A;">Quit</span></div>
+    </div>
+
+    <sc-if value="{{ hasWinner }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute; left:22px; right:22px; bottom:96px; background:#16162A; border-radius:18px; padding:14px 18px; display:flex; align-items:center; gap:12px; box-shadow:0 16px 34px -10px rgba(20,20,50,.5); animation:ttpop .4s ease both;">
+        <span class="ms" style="font-size:26px; color:{{ winColor }};">emoji_events</span>
+        <span style="flex:1; font-family:'Space Grotesk'; font-weight:700; font-size:17px; color:#fff;">{{ resultText }}</span>
+        <span onClick="{{ reset }}" style="font-family:'Hanken Grotesk'; font-weight:700; font-size:13px; color:#A5B4FC; cursor:pointer;">PLAY AGAIN</span>
+      </div>
+    </sc-if>
+  </div>
+</div>
+
+<!-- GAME — WINNING LINE (static state) -->
+<div style="position:absolute; left:404px; top:2740px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">08 · Game — winning-line state</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#16162A;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:4px 22px 12px;"><span class="ms" style="font-size:24px; color:#16162A;">arrow_back</span><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#75758A;">Pass &amp; Play</span><span class="ms" style="font-size:24px; color:#16162A;">more_horiz</span></div>
+    <div style="display:flex; align-items:stretch; gap:10px; padding:0 22px; margin-bottom:14px;">
+      <div style="flex:1; background:#E2F7F4; border-radius:18px; padding:12px; text-align:center; box-shadow:0 0 0 2px #14B8A6;"><div style="display:flex; align-items:center; justify-content:center; gap:6px;"><div style="width:26px; height:26px; border-radius:9px; background:linear-gradient(135deg,#14B8A6,#0E9488); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700; font-size:13px;">M</div><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#0F766E;">Mia</span></div><div style="font-family:'Space Grotesk'; font-weight:700; font-size:30px; color:#14B8A6; margin-top:4px;">3</div></div>
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:0 4px;"><span style="font-family:'Space Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE;">VS</span><div style="display:flex; align-items:center; gap:4px; background:#16162A; border-radius:20px; padding:5px 11px;"><span class="ms" style="font-size:14px; color:#fff;">timer</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:13px; color:#fff;">0:34</span></div></div>
+      <div style="flex:1; background:#FEEEE2; border-radius:18px; padding:12px; text-align:center;"><div style="display:flex; align-items:center; justify-content:center; gap:6px;"><div style="width:26px; height:26px; border-radius:9px; background:#FB923C; display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700; font-size:13px;">L</div><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#C2410C;">Leo</span></div><div style="font-family:'Space Grotesk'; font-weight:700; font-size:30px; color:#F97316; margin-top:4px;">2</div></div>
+    </div>
+    <div style="display:flex; justify-content:center; margin-bottom:16px;"><div style="display:flex; align-items:center; gap:9px; background:#E2F7F4; border-radius:999px; padding:8px 18px;"><span class="ms" style="font-size:18px; color:#14B8A6;">celebration</span><span style="font-family:'Hanken Grotesk'; font-weight:700; font-size:14px; color:#0F766E;">X completes a row!</span></div></div>
+    <div style="padding:0 26px; position:relative;">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+        <div style="aspect-ratio:1; border-radius:20px; background:#E2F7F4; box-shadow:inset 0 0 0 2px #14B8A6, 0 8px 18px -6px rgba(20,184,166,.45); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#14B8A6;">X</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#E2F7F4; box-shadow:inset 0 0 0 2px #14B8A6, 0 8px 18px -6px rgba(20,184,166,.45); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#14B8A6;">X</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#E2F7F4; box-shadow:inset 0 0 0 2px #14B8A6, 0 8px 18px -6px rgba(20,184,166,.45); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#14B8A6;">X</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#FEEEE2; box-shadow:inset 0 0 0 1.5px #EAEAF2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#F97316;">O</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#FEEEE2; box-shadow:inset 0 0 0 1.5px #EAEAF2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#F97316;">O</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#fff; box-shadow:inset 0 0 0 1.5px #EAEAF2;"></div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#fff; box-shadow:inset 0 0 0 1.5px #EAEAF2;"></div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#FEEEE2; box-shadow:inset 0 0 0 1.5px #EAEAF2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#F97316;">O</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#E2F7F4; box-shadow:inset 0 0 0 1.5px #EAEAF2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#14B8A6;">X</div>
+      </div>
+      <div style="position:absolute; left:26px; right:26px; top:13%; height:6px; background:#14B8A6; border-radius:999px; box-shadow:0 0 14px rgba(20,184,166,.7); transform:translateY(-50%);"></div>
+    </div>
+    <div style="position:absolute; bottom:30px; left:22px; right:22px; display:flex; gap:12px;">
+      <div style="flex:1; background:#fff; border-radius:16px; padding:13px; display:flex; flex-direction:column; align-items:center; gap:3px; box-shadow:0 1px 3px rgba(20,20,50,.07);"><span class="ms" style="font-size:22px; color:#75758A;">undo</span><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#75758A;">Undo</span></div>
+      <div style="flex:1; background:#EEEDFB; border-radius:16px; padding:13px; display:flex; flex-direction:column; align-items:center; gap:3px;"><span class="ms" style="font-size:22px; color:#4338CA;">replay</span><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#4338CA;">Restart</span></div>
+      <div style="flex:1; background:#fff; border-radius:16px; padding:13px; display:flex; flex-direction:column; align-items:center; gap:3px; box-shadow:0 1px 3px rgba(20,20,50,.07);"><span class="ms" style="font-size:22px; color:#75758A;">close</span><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#75758A;">Quit</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT MODAL -->
+<div style="position:absolute; left:808px; top:2740px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">09 · Round result — win</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#2A2470;">
+    <div style="position:absolute; inset:0; background:linear-gradient(160deg,#4F3FF0,#3A2FB0); opacity:.96;"></div>
+    <div style="height:44px; position:relative; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#fff;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <!-- confetti -->
+    <div style="position:absolute; left:40px; top:120px; width:9px; height:14px; background:#2DD4BF; border-radius:2px; animation:ttfall 2.4s linear infinite;"></div>
+    <div style="position:absolute; left:120px; top:90px; width:9px; height:14px; background:#FB923C; border-radius:2px; animation:ttfall 2.8s linear infinite .3s;"></div>
+    <div style="position:absolute; left:210px; top:110px; width:9px; height:14px; background:#FBBF24; border-radius:2px; animation:ttfall 2.2s linear infinite .6s;"></div>
+    <div style="position:absolute; left:280px; top:95px; width:9px; height:14px; background:#A5B4FC; border-radius:2px; animation:ttfall 3s linear infinite .15s;"></div>
+    <div style="position:absolute; left:80px; top:100px; width:9px; height:9px; background:#fff; border-radius:50%; animation:ttfall 2.6s linear infinite .9s;"></div>
+    <div style="position:absolute; left:170px; top:130px; width:9px; height:9px; background:#2DD4BF; border-radius:50%; animation:ttfall 2.5s linear infinite 1.1s;"></div>
+    <div style="position:absolute; left:250px; top:120px; width:9px; height:14px; background:#fff; border-radius:2px; animation:ttfall 2.9s linear infinite .5s;"></div>
+
+    <div style="position:absolute; left:22px; right:22px; top:50%; transform:translateY(-50%); background:#fff; border-radius:30px; padding:30px 24px; text-align:center; box-shadow:0 30px 60px -16px rgba(0,0,0,.5);">
+      <div style="width:74px; height:74px; border-radius:24px; background:#EEEDFB; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; animation:ttpop .5s ease both;"><span class="ms" style="font-size:42px; color:#F97316; font-variation-settings:'FILL' 1;">emoji_events</span></div>
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:32px; color:#16162A; letter-spacing:-.5px;">You win!</div>
+      <div style="font-family:'Hanken Grotesk'; font-size:14px; color:#75758A; margin-top:4px;">X takes the round with a diagonal</div>
+
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:5px; width:120px; margin:18px auto;">
+        <div style="aspect-ratio:1; border-radius:8px; background:#E2F7F4; box-shadow:inset 0 0 0 1.5px #14B8A6; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#14B8A6;">X</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#FEEEE2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#F97316;">O</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#F1F1F6;"></div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#FEEEE2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#F97316;">O</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#E2F7F4; box-shadow:inset 0 0 0 1.5px #14B8A6; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#14B8A6;">X</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#F1F1F6;"></div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#F1F1F6;"></div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#FEEEE2; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#F97316;">O</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#E2F7F4; box-shadow:inset 0 0 0 1.5px #14B8A6; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#14B8A6;">X</div>
+      </div>
+
+      <div style="display:flex; align-items:center; justify-content:center; gap:14px; background:#F7F7FB; border-radius:14px; padding:10px; margin-bottom:18px;"><span style="font-family:'Space Grotesk'; font-weight:700; font-size:20px; color:#14B8A6;">X 3</span><span style="font-family:'Hanken Grotesk'; font-size:12px; color:#9A9AAE;">+1</span><span style="font-family:'Hanken Grotesk'; font-size:14px; color:#C5C5D2;">·</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:20px; color:#F97316;">O 1</span></div>
+
+      <div style="display:flex; gap:10px;">
+        <div style="flex:1; background:#EEEDFB; color:#4338CA; font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; padding:14px; border-radius:15px; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="ms" style="font-size:20px;">home</span>Home</div>
+        <div style="flex:1.4; background:#4338CA; color:#fff; font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; padding:14px; border-radius:15px; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 10px 22px -6px rgba(67,56,202,.55);"><span class="ms" style="font-size:20px;">replay</span>Play again</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div style="position:absolute; left:1212px; top:2740px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">10 · Stats &amp; history</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#16162A;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="padding:6px 22px 80px; height:696px; box-sizing:border-box; overflow:hidden;">
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#16162A; margin-bottom:16px;">Your stats</div>
+      <div style="display:flex; gap:10px; margin-bottom:10px;">
+        <div style="flex:1; background:#4338CA; border-radius:18px; padding:14px; color:#fff;"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:28px;">68%</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:rgba(255,255,255,.8);">Win rate</div></div>
+        <div style="flex:1; background:#fff; border-radius:18px; padding:14px; box-shadow:0 1px 3px rgba(20,20,50,.07);"><div style="display:flex; align-items:center; gap:5px;"><span class="ms" style="font-size:20px; color:#F97316;">local_fire_department</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:28px; color:#16162A;">5</span></div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A;">Streak</div></div>
+      </div>
+      <div style="display:flex; gap:10px; margin-bottom:18px;">
+        <div style="flex:1; background:#fff; border-radius:16px; padding:12px; text-align:center; box-shadow:0 1px 3px rgba(20,20,50,.06);"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#14B8A6;">34</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#75758A;">Wins</div></div>
+        <div style="flex:1; background:#fff; border-radius:16px; padding:12px; text-align:center; box-shadow:0 1px 3px rgba(20,20,50,.06);"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#F97316;">11</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#75758A;">Losses</div></div>
+        <div style="flex:1; background:#fff; border-radius:16px; padding:12px; text-align:center; box-shadow:0 1px 3px rgba(20,20,50,.06);"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#9A9AAE;">5</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#75758A;">Draws</div></div>
+      </div>
+
+      <div style="background:#fff; border-radius:18px; padding:16px; margin-bottom:18px; box-shadow:0 1px 3px rgba(20,20,50,.06);">
+        <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#16162A; margin-bottom:14px;">Last 7 days</div>
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; height:84px; gap:8px;">
+          <div style="flex:1; height:40%; background:#E2F7F4; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:65%; background:#A5B4FC; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:50%; background:#E2F7F4; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:85%; background:#4338CA; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:70%; background:#A5B4FC; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:100%; background:#4338CA; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:55%; background:#E2F7F4; border-radius:8px 8px 4px 4px;"></div>
+        </div>
+      </div>
+
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:10px;">RECENT MATCHES</div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="background:#fff; border-radius:14px; padding:11px 14px; display:flex; align-items:center; gap:12px; box-shadow:0 1px 2px rgba(20,20,50,.05);"><div style="width:34px; height:34px; border-radius:11px; background:#FEEEE2; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:20px; color:#F97316;">smart_toy</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#16162A;">Vs AI · Hard</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#75758A;">2 min ago</div></div><span style="font-family:'Hanken Grotesk'; font-weight:700; font-size:11px; color:#14B8A6; background:#E2F7F4; padding:4px 9px; border-radius:20px;">WIN</span></div>
+        <div style="background:#fff; border-radius:14px; padding:11px 14px; display:flex; align-items:center; gap:12px; box-shadow:0 1px 2px rgba(20,20,50,.05);"><div style="width:34px; height:34px; border-radius:11px; background:#E2F7F4; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:20px; color:#14B8A6;">group</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#16162A;">Pass &amp; Play</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#75758A;">1 hr ago</div></div><span style="font-family:'Hanken Grotesk'; font-weight:700; font-size:11px; color:#9A9AAE; background:#F1F1F6; padding:4px 9px; border-radius:20px;">DRAW</span></div>
+        <div style="background:#fff; border-radius:14px; padding:11px 14px; display:flex; align-items:center; gap:12px; box-shadow:0 1px 2px rgba(20,20,50,.05);"><div style="width:34px; height:34px; border-radius:11px; background:#EEEDFB; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:20px; color:#4338CA;">bolt</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#16162A;">Quick Match</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#75758A;">Yesterday</div></div><span style="font-family:'Hanken Grotesk'; font-weight:700; font-size:11px; color:#F97316; background:#FEEEE2; padding:4px 9px; border-radius:20px;">LOSS</span></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; right:0; height:68px; background:#fff; border-top:1px solid #EDEDF3; display:flex; justify-content:space-around; align-items:center; padding-bottom:4px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">home</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Home</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#4338CA; font-variation-settings:'FILL' 1;">bar_chart</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#4338CA;">Stats</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">person</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Profile</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">settings</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Settings</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div style="position:absolute; left:1616px; top:2740px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">11 · Settings</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#16162A;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="padding:6px 22px 12px; height:628px; box-sizing:border-box; overflow:hidden;">
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#16162A; margin-bottom:14px;">Settings</div>
+
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:6px;">GENERAL</div>
+      <div style="background:#fff; border-radius:18px; overflow:hidden; margin-bottom:14px; box-shadow:0 1px 3px rgba(20,20,50,.06);">
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px; border-bottom:1px solid #F4F4F8;"><span class="ms" style="font-size:22px; color:#4338CA;">volume_up</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#16162A;">Sound effects</span><div style="width:50px; height:30px; border-radius:999px; background:#4338CA; position:relative;"><div style="position:absolute; top:3px; right:3px; width:24px; height:24px; border-radius:50%; background:#fff;"></div></div></div>
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px; border-bottom:1px solid #F4F4F8;"><span class="ms" style="font-size:22px; color:#4338CA;">vibration</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#16162A;">Haptics</span><div style="width:50px; height:30px; border-radius:999px; background:#4338CA; position:relative;"><div style="position:absolute; top:3px; right:3px; width:24px; height:24px; border-radius:50%; background:#fff;"></div></div></div>
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px;"><span class="ms" style="font-size:22px; color:#4338CA;">dark_mode</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#16162A;">Dark mode</span><div style="width:50px; height:30px; border-radius:999px; background:#DEDEE8; position:relative;"><div style="position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#fff;"></div></div></div>
+      </div>
+
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:6px;">GAMEPLAY</div>
+      <div style="background:#fff; border-radius:18px; padding:14px 16px; margin-bottom:12px; box-shadow:0 1px 3px rgba(20,20,50,.06);">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;"><span class="ms" style="font-size:22px; color:#4338CA;">smart_toy</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#16162A;">Default AI difficulty</span></div>
+        <div style="display:flex; background:#F1F1F6; border-radius:12px; padding:4px;"><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#75758A; padding:8px;">Easy</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#fff; padding:8px; background:#4338CA; border-radius:9px;">Medium</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#75758A; padding:8px;">Hard</div></div>
+      </div>
+      <div style="background:#fff; border-radius:18px; padding:14px 16px; margin-bottom:14px; box-shadow:0 1px 3px rgba(20,20,50,.06);">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;"><span class="ms" style="font-size:22px; color:#4338CA;">palette</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#16162A;">Board theme</span></div>
+        <div style="display:flex; gap:10px;"><div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#E2F7F4,#FEEEE2); border:2px solid #4338CA;"></div><div style="width:42px; height:42px; border-radius:12px; background:#16162A; border:2px solid transparent;"></div><div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#EEEDFB,#fff); border:2px solid transparent;"></div></div>
+      </div>
+
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:6px;">ACCOUNT</div>
+      <div style="background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 1px 3px rgba(20,20,50,.06);">
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px; border-bottom:1px solid #F4F4F8;"><span class="ms" style="font-size:22px; color:#75758A;">account_circle</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#16162A;">Account</span><span class="ms" style="font-size:20px; color:#C5C5D2;">chevron_right</span></div>
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px;"><span class="ms" style="font-size:22px; color:#75758A;">info</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#16162A;">About TicTac</span><span style="font-family:'Hanken Grotesk'; font-size:12px; color:#9A9AAE;">v1.0</span></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; right:0; height:68px; background:#fff; border-top:1px solid #EDEDF3; display:flex; justify-content:space-around; align-items:center; padding-bottom:4px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">home</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Home</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">bar_chart</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Stats</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">person</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Profile</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#4338CA; font-variation-settings:'FILL' 1;">settings</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#4338CA;">Settings</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div style="position:absolute; left:2020px; top:2740px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">12 · Profile</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(20,20,50,.4); border:1px solid #E7E7EF; background:#F4F4F8;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#fff;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="position:absolute; top:0; left:0; right:0; height:230px; background:linear-gradient(160deg,#4F3FF0,#3A2FB0); border-radius:0 0 32px 32px;"></div>
+    <div style="position:relative; padding:14px 22px 80px; height:696px; box-sizing:border-box; overflow:hidden;">
+      <div style="text-align:center; margin-bottom:18px;">
+        <div style="width:84px; height:84px; border-radius:28px; background:linear-gradient(135deg,#14B8A6,#0E9488); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:34px; color:#fff; border:4px solid rgba(255,255,255,.25); box-shadow:0 12px 28px -8px rgba(0,0,0,.35);">K</div>
+        <div style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#fff;">Kai Mercer</div>
+        <div style="font-family:'Hanken Grotesk'; font-size:13px; color:rgba(255,255,255,.75);">@kaiplays · joined 2025</div>
+      </div>
+
+      <div style="background:#fff; border-radius:20px; padding:16px; margin-bottom:18px; box-shadow:0 8px 22px -10px rgba(20,20,50,.2);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;"><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#16162A;">Level 7</span><span style="font-family:'Hanken Grotesk'; font-size:12px; color:#75758A;">320 / 500 XP</span></div>
+        <div style="height:10px; border-radius:999px; background:#F1F1F6;"><div style="width:64%; height:10px; border-radius:999px; background:linear-gradient(90deg,#4338CA,#6D5DF0);"></div></div>
+        <div style="font-family:'Hanken Grotesk'; font-size:11px; color:#9A9AAE; margin-top:8px;">180 XP to <span style="color:#4338CA; font-weight:600;">Level 8 · Strategist</span></div>
+      </div>
+
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#9A9AAE; letter-spacing:.8px; margin-bottom:12px;">ACHIEVEMENTS</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;">
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#FEEEE2; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#F97316; font-variation-settings:'FILL' 1;">local_fire_department</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#75758A; margin-top:5px;">5 streak</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#E2F7F4; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#14B8A6; font-variation-settings:'FILL' 1;">bolt</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#75758A; margin-top:5px;">Fast win</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#EEEDFB; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#4338CA; font-variation-settings:'FILL' 1;">military_tech</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#75758A; margin-top:5px;">Beat Hard</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#F1F1F6; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#C5C5D2;">lock</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#9A9AAE; margin-top:5px;">Locked</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#FEF3C7; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#F59E0B; font-variation-settings:'FILL' 1;">emoji_events</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#75758A; margin-top:5px;">50 wins</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#E2F7F4; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#14B8A6; font-variation-settings:'FILL' 1;">workspace_premium</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#75758A; margin-top:5px;">Perfect</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#F1F1F6; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#C5C5D2;">lock</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#9A9AAE; margin-top:5px;">Locked</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#F1F1F6; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#C5C5D2;">lock</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#9A9AAE; margin-top:5px;">Locked</div></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; right:0; height:68px; background:#fff; border-top:1px solid #EDEDF3; display:flex; justify-content:space-around; align-items:center; padding-bottom:4px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">home</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Home</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">bar_chart</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Stats</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#4338CA; font-variation-settings:'FILL' 1;">person</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#4338CA;">Profile</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A8A8B8;">settings</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A8A8B8;">Settings</span></div>
+    </div>
+  </div>
+</div>
+<!-- ============ DARK VARIANTS ============ -->
+<div style="position:absolute; left:0; top:3640px; width:2360px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#9A9AAE; letter-spacing:1.5px; text-transform:uppercase;">Dark Mode — matching variants</div>
+</div>
+
+<!-- DARK HOME -->
+<div style="position:absolute; left:0; top:3690px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">13 · Home · dark</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(0,0,0,.6); border:1px solid #23232E; background:#0E0E14;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#ECECF3;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="padding:8px 22px 80px; box-sizing:border-box; height:696px; overflow:hidden;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+        <div><div style="font-family:'Hanken Grotesk'; font-size:13px; color:#9A9AAE;">Good evening,</div><div style="font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#ECECF3;">Kai</div></div>
+        <div style="display:flex; gap:10px; align-items:center;"><div style="width:42px; height:42px; border-radius:14px; background:#1A1A22; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:22px; color:#9A9AAE;">settings</span></div><div style="width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,#6D5DF0,#A5B4FC); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700;">K</div></div>
+      </div>
+      <div style="background:linear-gradient(135deg,#4338CA,#6D5DF0); border-radius:22px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; box-shadow:0 14px 34px -12px rgba(67,56,202,.8);">
+        <div><div style="display:flex; align-items:center; gap:6px;"><span class="ms" style="font-size:18px; color:#FDBA74;">local_fire_department</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#fff;">5</span><span style="font-family:'Hanken Grotesk'; font-size:13px; color:rgba(255,255,255,.8);">day streak</span></div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:rgba(255,255,255,.7); margin-top:6px;">Level 7 · 320 / 500 XP</div><div style="width:150px; height:6px; border-radius:999px; background:rgba(255,255,255,.25); margin-top:7px;"><div style="width:64%; height:6px; border-radius:999px; background:#fff;"></div></div></div>
+        <div style="width:54px; height:54px; border-radius:18px; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#fff;">7</div>
+      </div>
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:13px; color:#75758A; letter-spacing:.8px; margin-bottom:12px;">GAME MODES</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="background:#1A1A22; border-radius:20px; padding:16px; display:flex; align-items:center; gap:14px;"><div style="width:48px; height:48px; border-radius:15px; background:#16302E; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:26px; color:#2DD4BF;">group</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:16px; color:#ECECF3;">Pass &amp; Play</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#9A9AAE;">2 players · one device</div></div><span class="ms" style="font-size:22px; color:#52525E;">chevron_right</span></div>
+        <div style="background:#1A1A22; border-radius:20px; padding:16px;"><div style="display:flex; align-items:center; gap:14px;"><div style="width:48px; height:48px; border-radius:15px; background:#33271C; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:26px; color:#FB923C;">smart_toy</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:16px; color:#ECECF3;">Vs AI</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#9A9AAE;">Pick your challenge</div></div></div><div style="display:flex; background:#23232E; border-radius:12px; padding:4px; margin-top:12px;"><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; padding:7px;">Easy</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#0E0E14; padding:7px; background:#A5B4FC; border-radius:9px;">Medium</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; padding:7px;">Hard</div></div></div>
+        <div style="background:#1A1A22; border-radius:20px; padding:16px; display:flex; align-items:center; gap:14px;"><div style="width:48px; height:48px; border-radius:15px; background:#26263A; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:26px; color:#A5B4FC;">bolt</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:16px; color:#ECECF3;">Quick Match</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#9A9AAE;">Online · find an opponent</div></div><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:700; color:#2DD4BF; background:#16302E; padding:4px 9px; border-radius:20px;">LIVE</span></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; right:0; height:68px; background:#15151D; border-top:1px solid #23232E; display:flex; justify-content:space-around; align-items:center; padding-bottom:4px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A5B4FC; font-variation-settings:'FILL' 1;">home</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A5B4FC;">Home</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">bar_chart</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Stats</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">person</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Profile</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">settings</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Settings</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- DARK GAME -->
+<div style="position:absolute; left:404px; top:3690px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">14 · Game · dark</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(0,0,0,.6); border:1px solid #23232E; background:#0E0E14;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#ECECF3;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:4px 22px 12px;"><span class="ms" style="font-size:24px; color:#ECECF3;">arrow_back</span><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#9A9AAE;">Vs AI · Hard</span><span class="ms" style="font-size:24px; color:#ECECF3;">more_horiz</span></div>
+    <div style="display:flex; align-items:stretch; gap:10px; padding:0 22px; margin-bottom:14px;">
+      <div style="flex:1; background:#16302E; border-radius:18px; padding:12px; text-align:center; box-shadow:0 0 0 2px #2DD4BF;"><div style="display:flex; align-items:center; justify-content:center; gap:6px;"><div style="width:26px; height:26px; border-radius:9px; background:linear-gradient(135deg,#6D5DF0,#A5B4FC); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Space Grotesk'; font-weight:700; font-size:13px;">K</div><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#5EEAD4;">Kai</span></div><div style="font-family:'Space Grotesk'; font-weight:700; font-size:30px; color:#2DD4BF; margin-top:4px;">2</div></div>
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:0 4px;"><span style="font-family:'Space Grotesk'; font-weight:700; font-size:12px; color:#62626E;">VS</span><div style="display:flex; align-items:center; gap:4px; background:#23232E; border-radius:20px; padding:5px 11px;"><span class="ms" style="font-size:14px; color:#ECECF3;">timer</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:13px; color:#ECECF3;">0:08</span></div></div>
+      <div style="flex:1; background:#33271C; border-radius:18px; padding:12px; text-align:center;"><div style="display:flex; align-items:center; justify-content:center; gap:6px;"><div style="width:26px; height:26px; border-radius:9px; background:#FB923C; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:16px; color:#fff;">smart_toy</span></div><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#FDBA74;">AI</span></div><div style="font-family:'Space Grotesk'; font-weight:700; font-size:30px; color:#FB923C; margin-top:4px;">1</div></div>
+    </div>
+    <div style="display:flex; justify-content:center; margin-bottom:16px;"><div style="display:flex; align-items:center; gap:9px; background:#1A1A22; border-radius:999px; padding:8px 18px;"><span style="width:10px; height:10px; border-radius:50%; background:#2DD4BF;"></span><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#ECECF3;">X to move</span></div></div>
+    <div style="padding:0 26px;">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+        <div style="aspect-ratio:1; border-radius:20px; background:#16302E; box-shadow:inset 0 0 0 1.5px #2A2A38; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#2DD4BF;">X</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#23232E;"></div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#33271C; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#FB923C;">O</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#23232E;"></div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#16302E; box-shadow:inset 0 0 0 1.5px #2A2A38; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#2DD4BF;">X</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#23232E;"></div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#33271C; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:46px; color:#FB923C;">O</div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#23232E;"></div>
+        <div style="aspect-ratio:1; border-radius:20px; background:#23232E;"></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:30px; left:22px; right:22px; display:flex; gap:12px;">
+      <div style="flex:1; background:#1A1A22; border-radius:16px; padding:13px; display:flex; flex-direction:column; align-items:center; gap:3px;"><span class="ms" style="font-size:22px; color:#9A9AAE;">undo</span><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#9A9AAE;">Undo</span></div>
+      <div style="flex:1; background:#26263A; border-radius:16px; padding:13px; display:flex; flex-direction:column; align-items:center; gap:3px;"><span class="ms" style="font-size:22px; color:#A5B4FC;">replay</span><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#A5B4FC;">Restart</span></div>
+      <div style="flex:1; background:#1A1A22; border-radius:16px; padding:13px; display:flex; flex-direction:column; align-items:center; gap:3px;"><span class="ms" style="font-size:22px; color:#9A9AAE;">close</span><span style="font-family:'Hanken Grotesk'; font-size:11px; font-weight:600; color:#9A9AAE;">Quit</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- DARK RESULT -->
+<div style="position:absolute; left:808px; top:3690px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">15 · Result · dark · draw</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(0,0,0,.6); border:1px solid #23232E; background:#0E0E14;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#ECECF3;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="position:absolute; inset:0; background:rgba(8,8,12,.6);"></div>
+    <div style="position:absolute; left:22px; right:22px; top:50%; transform:translateY(-50%); background:#1A1A22; border-radius:30px; padding:30px 24px; text-align:center; box-shadow:0 30px 60px -16px rgba(0,0,0,.7); border:1px solid #2A2A38;">
+      <div style="width:74px; height:74px; border-radius:24px; background:#23232E; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;"><span class="ms" style="font-size:42px; color:#9A9AAE;">handshake</span></div>
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:32px; color:#ECECF3; letter-spacing:-.5px;">It's a draw</div>
+      <div style="font-family:'Hanken Grotesk'; font-size:14px; color:#9A9AAE; margin-top:4px;">Nobody completed a line — rematch?</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:5px; width:120px; margin:18px auto;">
+        <div style="aspect-ratio:1; border-radius:8px; background:#16302E; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#2DD4BF;">X</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#33271C; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#FB923C;">O</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#16302E; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#2DD4BF;">X</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#33271C; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#FB923C;">O</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#16302E; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#2DD4BF;">X</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#16302E; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#2DD4BF;">X</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#33271C; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#FB923C;">O</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#16302E; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#2DD4BF;">X</div>
+        <div style="aspect-ratio:1; border-radius:8px; background:#33271C; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:18px; color:#FB923C;">O</div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:14px; background:#23232E; border-radius:14px; padding:10px; margin-bottom:18px;"><span style="font-family:'Space Grotesk'; font-weight:700; font-size:20px; color:#2DD4BF;">X 2</span><span style="font-family:'Hanken Grotesk'; font-size:14px; color:#52525E;">·</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:20px; color:#FB923C;">O 2</span></div>
+      <div style="display:flex; gap:10px;">
+        <div style="flex:1; background:#26263A; color:#A5B4FC; font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; padding:14px; border-radius:15px; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="ms" style="font-size:20px;">home</span>Home</div>
+        <div style="flex:1.4; background:#6D5DF0; color:#fff; font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; padding:14px; border-radius:15px; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="ms" style="font-size:20px;">replay</span>Play again</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DARK STATS -->
+<div style="position:absolute; left:1212px; top:3690px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">16 · Stats · dark</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(0,0,0,.6); border:1px solid #23232E; background:#0E0E14;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#ECECF3;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="padding:6px 22px 80px; height:696px; box-sizing:border-box; overflow:hidden;">
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#ECECF3; margin-bottom:16px;">Your stats</div>
+      <div style="display:flex; gap:10px; margin-bottom:10px;">
+        <div style="flex:1; background:linear-gradient(135deg,#4338CA,#6D5DF0); border-radius:18px; padding:14px; color:#fff;"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:28px;">68%</div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:rgba(255,255,255,.8);">Win rate</div></div>
+        <div style="flex:1; background:#1A1A22; border-radius:18px; padding:14px;"><div style="display:flex; align-items:center; gap:5px;"><span class="ms" style="font-size:20px; color:#FB923C;">local_fire_department</span><span style="font-family:'Space Grotesk'; font-weight:700; font-size:28px; color:#ECECF3;">5</span></div><div style="font-family:'Hanken Grotesk'; font-size:12px; color:#9A9AAE;">Streak</div></div>
+      </div>
+      <div style="display:flex; gap:10px; margin-bottom:18px;">
+        <div style="flex:1; background:#1A1A22; border-radius:16px; padding:12px; text-align:center;"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#2DD4BF;">34</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#9A9AAE;">Wins</div></div>
+        <div style="flex:1; background:#1A1A22; border-radius:16px; padding:12px; text-align:center;"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#FB923C;">11</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#9A9AAE;">Losses</div></div>
+        <div style="flex:1; background:#1A1A22; border-radius:16px; padding:12px; text-align:center;"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#9A9AAE;">5</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#9A9AAE;">Draws</div></div>
+      </div>
+      <div style="background:#1A1A22; border-radius:18px; padding:16px; margin-bottom:18px;">
+        <div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#ECECF3; margin-bottom:14px;">Last 7 days</div>
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; height:84px; gap:8px;">
+          <div style="flex:1; height:40%; background:#16302E; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:65%; background:#6D5DF0; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:50%; background:#16302E; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:85%; background:#A5B4FC; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:70%; background:#6D5DF0; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:100%; background:#A5B4FC; border-radius:8px 8px 4px 4px;"></div>
+          <div style="flex:1; height:55%; background:#16302E; border-radius:8px 8px 4px 4px;"></div>
+        </div>
+      </div>
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#75758A; letter-spacing:.8px; margin-bottom:10px;">RECENT MATCHES</div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="background:#1A1A22; border-radius:14px; padding:11px 14px; display:flex; align-items:center; gap:12px;"><div style="width:34px; height:34px; border-radius:11px; background:#33271C; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:20px; color:#FB923C;">smart_toy</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#ECECF3;">Vs AI · Hard</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#9A9AAE;">2 min ago</div></div><span style="font-family:'Hanken Grotesk'; font-weight:700; font-size:11px; color:#2DD4BF; background:#16302E; padding:4px 9px; border-radius:20px;">WIN</span></div>
+        <div style="background:#1A1A22; border-radius:14px; padding:11px 14px; display:flex; align-items:center; gap:12px;"><div style="width:34px; height:34px; border-radius:11px; background:#16302E; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:20px; color:#2DD4BF;">group</span></div><div style="flex:1;"><div style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#ECECF3;">Pass &amp; Play</div><div style="font-family:'Hanken Grotesk'; font-size:11px; color:#9A9AAE;">1 hr ago</div></div><span style="font-family:'Hanken Grotesk'; font-weight:700; font-size:11px; color:#9A9AAE; background:#23232E; padding:4px 9px; border-radius:20px;">DRAW</span></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; right:0; height:68px; background:#15151D; border-top:1px solid #23232E; display:flex; justify-content:space-around; align-items:center; padding-bottom:4px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">home</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Home</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A5B4FC; font-variation-settings:'FILL' 1;">bar_chart</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A5B4FC;">Stats</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">person</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Profile</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">settings</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Settings</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- DARK SETTINGS -->
+<div style="position:absolute; left:1616px; top:3690px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">17 · Settings · dark</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(0,0,0,.6); border:1px solid #23232E; background:#0E0E14;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#ECECF3;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="padding:6px 22px 12px; height:628px; box-sizing:border-box; overflow:hidden;">
+      <div style="font-family:'Space Grotesk'; font-weight:700; font-size:24px; color:#ECECF3; margin-bottom:14px;">Settings</div>
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#75758A; letter-spacing:.8px; margin-bottom:6px;">GENERAL</div>
+      <div style="background:#1A1A22; border-radius:18px; overflow:hidden; margin-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px; border-bottom:1px solid #23232E;"><span class="ms" style="font-size:22px; color:#A5B4FC;">volume_up</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#ECECF3;">Sound effects</span><div style="width:50px; height:30px; border-radius:999px; background:#6D5DF0; position:relative;"><div style="position:absolute; top:3px; right:3px; width:24px; height:24px; border-radius:50%; background:#fff;"></div></div></div>
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px; border-bottom:1px solid #23232E;"><span class="ms" style="font-size:22px; color:#A5B4FC;">vibration</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#ECECF3;">Haptics</span><div style="width:50px; height:30px; border-radius:999px; background:#33333F; position:relative;"><div style="position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#fff;"></div></div></div>
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px;"><span class="ms" style="font-size:22px; color:#A5B4FC;">dark_mode</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#ECECF3;">Dark mode</span><div style="width:50px; height:30px; border-radius:999px; background:#6D5DF0; position:relative;"><div style="position:absolute; top:3px; right:3px; width:24px; height:24px; border-radius:50%; background:#fff;"></div></div></div>
+      </div>
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#75758A; letter-spacing:.8px; margin-bottom:6px;">GAMEPLAY</div>
+      <div style="background:#1A1A22; border-radius:18px; padding:14px 16px; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;"><span class="ms" style="font-size:22px; color:#A5B4FC;">smart_toy</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#ECECF3;">Default AI difficulty</span></div>
+        <div style="display:flex; background:#23232E; border-radius:12px; padding:4px;"><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#9A9AAE; padding:8px;">Easy</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#9A9AAE; padding:8px;">Medium</div><div style="flex:1; text-align:center; font-family:'Hanken Grotesk'; font-weight:600; font-size:13px; color:#0E0E14; padding:8px; background:#A5B4FC; border-radius:9px;">Hard</div></div>
+      </div>
+      <div style="background:#1A1A22; border-radius:18px; padding:14px 16px; margin-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;"><span class="ms" style="font-size:22px; color:#A5B4FC;">palette</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#ECECF3;">Board theme</span></div>
+        <div style="display:flex; gap:10px;"><div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#16302E,#33271C); border:2px solid #A5B4FC;"></div><div style="width:42px; height:42px; border-radius:12px; background:#23232E; border:2px solid transparent;"></div><div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#26263A,#16302E); border:2px solid transparent;"></div></div>
+      </div>
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#75758A; letter-spacing:.8px; margin-bottom:6px;">ACCOUNT</div>
+      <div style="background:#1A1A22; border-radius:18px; overflow:hidden;">
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px; border-bottom:1px solid #23232E;"><span class="ms" style="font-size:22px; color:#9A9AAE;">account_circle</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#ECECF3;">Account</span><span class="ms" style="font-size:20px; color:#52525E;">chevron_right</span></div>
+        <div style="display:flex; align-items:center; gap:14px; padding:8px 16px;"><span class="ms" style="font-size:22px; color:#9A9AAE;">info</span><span style="flex:1; font-family:'Hanken Grotesk'; font-weight:500; font-size:15px; color:#ECECF3;">About TicTac</span><span style="font-family:'Hanken Grotesk'; font-size:12px; color:#62626E;">v1.0</span></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; right:0; height:68px; background:#15151D; border-top:1px solid #23232E; display:flex; justify-content:space-around; align-items:center; padding-bottom:4px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">home</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Home</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">bar_chart</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Stats</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">person</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Profile</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A5B4FC; font-variation-settings:'FILL' 1;">settings</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A5B4FC;">Settings</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- DARK PROFILE -->
+<div style="position:absolute; left:2020px; top:3690px; width:340px;">
+  <div data-drags-parent="1" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:12px; color:#9A9AAE; margin-bottom:10px; letter-spacing:.5px;">18 · Profile · dark</div>
+  <div style="width:340px; height:740px; border-radius:42px; overflow:hidden; position:relative; box-shadow:0 30px 60px -24px rgba(0,0,0,.6); border:1px solid #23232E; background:#0E0E14;">
+    <div style="height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-sizing:border-box; font-family:'Hanken Grotesk'; font-size:13px; font-weight:600; color:#fff;"><span>9:41</span><span style="display:flex; gap:7px; align-items:center;"><span class="ms" style="font-size:15px;">signal_cellular_alt</span><span class="ms" style="font-size:15px;">wifi</span><span class="ms" style="font-size:17px;">battery_full</span></span></div>
+    <div style="position:absolute; top:0; left:0; right:0; height:230px; background:linear-gradient(160deg,#4338CA,#2A2470); border-radius:0 0 32px 32px;"></div>
+    <div style="position:relative; padding:14px 22px 80px; height:696px; box-sizing:border-box; overflow:hidden;">
+      <div style="text-align:center; margin-bottom:18px;">
+        <div style="width:84px; height:84px; border-radius:28px; background:linear-gradient(135deg,#2DD4BF,#0E9488); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:34px; color:#fff; border:4px solid rgba(255,255,255,.2); box-shadow:0 12px 28px -8px rgba(0,0,0,.5);">K</div>
+        <div style="font-family:'Space Grotesk'; font-weight:700; font-size:22px; color:#fff;">Kai Mercer</div>
+        <div style="font-family:'Hanken Grotesk'; font-size:13px; color:rgba(255,255,255,.7);">@kaiplays · joined 2025</div>
+      </div>
+      <div style="background:#1A1A22; border-radius:20px; padding:16px; margin-bottom:18px; box-shadow:0 8px 22px -10px rgba(0,0,0,.5);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;"><span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#ECECF3;">Level 7</span><span style="font-family:'Hanken Grotesk'; font-size:12px; color:#9A9AAE;">320 / 500 XP</span></div>
+        <div style="height:10px; border-radius:999px; background:#23232E;"><div style="width:64%; height:10px; border-radius:999px; background:linear-gradient(90deg,#6D5DF0,#A5B4FC);"></div></div>
+        <div style="font-family:'Hanken Grotesk'; font-size:11px; color:#9A9AAE; margin-top:8px;">180 XP to <span style="color:#A5B4FC; font-weight:600;">Level 8 · Strategist</span></div>
+      </div>
+      <div style="font-family:'Hanken Grotesk'; font-weight:700; font-size:12px; color:#75758A; letter-spacing:.8px; margin-bottom:12px;">ACHIEVEMENTS</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;">
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#33271C; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#FB923C; font-variation-settings:'FILL' 1;">local_fire_department</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#9A9AAE; margin-top:5px;">5 streak</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#16302E; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#2DD4BF; font-variation-settings:'FILL' 1;">bolt</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#9A9AAE; margin-top:5px;">Fast win</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#26263A; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#A5B4FC; font-variation-settings:'FILL' 1;">military_tech</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#9A9AAE; margin-top:5px;">Beat Hard</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#1A1A22; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#3A3A48;">lock</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#62626E; margin-top:5px;">Locked</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#3A2E10; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#F59E0B; font-variation-settings:'FILL' 1;">emoji_events</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#9A9AAE; margin-top:5px;">50 wins</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#16302E; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#2DD4BF; font-variation-settings:'FILL' 1;">workspace_premium</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#9A9AAE; margin-top:5px;">Perfect</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#1A1A22; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#3A3A48;">lock</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#62626E; margin-top:5px;">Locked</div></div>
+        <div style="text-align:center;"><div style="aspect-ratio:1; border-radius:18px; background:#1A1A22; display:flex; align-items:center; justify-content:center;"><span class="ms" style="font-size:30px; color:#3A3A48;">lock</span></div><div style="font-family:'Hanken Grotesk'; font-size:9px; color:#62626E; margin-top:5px;">Locked</div></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; right:0; height:68px; background:#15151D; border-top:1px solid #23232E; display:flex; justify-content:space-around; align-items:center; padding-bottom:4px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">home</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Home</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">bar_chart</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Stats</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#A5B4FC; font-variation-settings:'FILL' 1;">person</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#A5B4FC;">Profile</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:2px;"><span class="ms" style="font-size:24px; color:#62626E;">settings</span><span style="font-family:'Hanken Grotesk'; font-size:10px; font-weight:600; color:#62626E;">Settings</span></div>
+    </div>
+  </div>
+</div></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { board: Array(9).fill(null), turn: 'X', winner: null, line: null, scoreX: 2, scoreO: 1, draws: 0 };
+
+  get LINES() {
+    return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  }
+
+  check(b) {
+    for (const L of this.LINES) {
+      const [a,c,d] = L;
+      if (b[a] && b[a] === b[c] && b[a] === b[d]) return { w: b[a], line: L };
+    }
+    if (b.every(x => x)) return { w: 'draw', line: null };
+    return null;
+  }
+
+  play(i) {
+    if (this.state.board[i] || this.state.winner) return;
+    const b = this.state.board.slice();
+    b[i] = this.state.turn;
+    const r = this.check(b);
+    this.setState(s => {
+      let sx = s.scoreX, so = s.scoreO, dr = s.draws, winner = null, line = null;
+      if (r) {
+        winner = r.w; line = r.line;
+        if (r.w === 'X') sx++; else if (r.w === 'O') so++; else dr++;
+      }
+      return { board: b, turn: s.turn === 'X' ? 'O' : 'X', winner, line, scoreX: sx, scoreO: so, draws: dr };
+    });
+  }
+
+  reset() {
+    this.setState({ board: Array(9).fill(null), turn: 'X', winner: null, line: null });
+  }
+
+  renderVals() {
+    const { board, turn, winner, line, scoreX, scoreO } = this.state;
+    const cells = board.map((m, i) => {
+      const isWin = !!(line && line.includes(i));
+      const fg = m === 'X' ? 'var(--x)' : m === 'O' ? 'var(--o)' : 'transparent';
+      let bg = 'var(--surface-2)';
+      if (isWin) bg = winner === 'X' ? 'var(--x-soft)' : 'var(--o-soft)';
+      const ring = isWin ? (winner === 'X' ? '2px solid var(--x)' : '2px solid var(--o)') : '2px solid transparent';
+      return { idx: i, mark: m || '', fg, bg, ring, onClick: () => this.play(i) };
+    });
+    const turnIsX = turn === 'X';
+    let statusText;
+    if (winner === 'draw') statusText = "It's a draw";
+    else if (winner) statusText = winner + ' wins the round';
+    else statusText = (turnIsX ? 'X' : 'O') + ' to move';
+    const resultText = winner === 'draw' ? 'Draw' : winner === 'X' ? 'You win!' : winner === 'O' ? 'O wins' : '';
+    return {
+      cells, statusText, turnIsX,
+      turnDot: turnIsX ? 'var(--x)' : 'var(--o)',
+      turnName: turnIsX ? 'X' : 'O',
+      scoreX, scoreO,
+      hasWinner: !!winner,
+      winSoft: winner === 'X' ? 'var(--x-soft)' : winner === 'O' ? 'var(--o-soft)' : 'var(--surface-2)',
+      winColor: winner === 'X' ? 'var(--x)' : winner === 'O' ? 'var(--o)' : 'var(--primary)',
+      resultText,
+      reset: () => this.reset()
+    };
+  }
+}
+</script>
+</body>
+</html>
