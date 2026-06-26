@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.skystone1000'
+    namespace 'com.skystone1000.xoxo'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.skystone1000"
+        applicationId "com.skystone1000.xoxo"
         minSdk 21
         targetSdk 35
         versionCode 2
