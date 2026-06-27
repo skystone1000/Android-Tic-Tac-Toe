@@ -8,7 +8,15 @@ settings, and a custom design system.
 > The app and package are **XOXO** / `com.skystone1000.xoxo`.
 
 <p align="center">
-  <img src="Screenshots/v1.0.png" alt="XOXO screenshot" width="280">
+  <img src="Screenshots/Home%20Light.png" alt="Home screen" width="30%" />
+  &nbsp;
+  <img src="Screenshots/Board%20Dark.png" alt="Game board (dark)" width="30%" />
+  &nbsp;
+  <img src="Screenshots/Stats%20Light.png" alt="Stats screen" width="30%" />
+</p>
+
+<p align="center">
+  <i>Pass &amp; Play or beat the AI · Track every win · Beautiful in light &amp; dark</i>
 </p>
 
 ---
@@ -23,6 +31,49 @@ settings, and a custom design system.
 - **Completely offline.** No online play, no levels/XP/achievements (by design).
 
 Full details: [`TicTacToe/docs/FEATURES.md`](TicTacToe/docs/FEATURES.md).
+
+---
+
+## 📸 Screenshots
+
+The galleries are collapsed to keep this page short — click a row to expand it.
+
+<details open>
+<summary><b>🎮 Gameplay</b> — board, win &amp; draw</summary>
+<br/>
+<p align="center">
+  <img src="Screenshots/Board%20Light.png" width="19%" alt="Live match" />
+  <img src="Screenshots/Win%20Light.png" width="19%" alt="Victory with confetti" />
+  <img src="Screenshots/Board%20Dark.png" width="19%" alt="Vs AI in dark mode" />
+  <img src="Screenshots/Setup%20Dark.png" width="19%" alt="Match setup (dark)" />
+  <img src="Screenshots/Draw%20Dark.png" width="19%" alt="Draw" />
+</p>
+<p align="center"><sub><b>Live match&nbsp;&nbsp;·&nbsp;&nbsp;Victory + confetti&nbsp;&nbsp;·&nbsp;&nbsp;Vs AI (dark)&nbsp;&nbsp;·&nbsp;&nbsp;Match setup&nbsp;&nbsp;·&nbsp;&nbsp;Draw</b></sub></p>
+</details>
+
+<details>
+<summary><b>☀️ Light theme</b> — Home · Stats · Profile · Settings · Setup</summary>
+<br/>
+<p align="center">
+  <img src="Screenshots/Home%20Light.png" width="19%" alt="Home (light)" />
+  <img src="Screenshots/Stats%20Light.png" width="19%" alt="Stats (light)" />
+  <img src="Screenshots/Profile%20Light.png" width="19%" alt="Profile (light)" />
+  <img src="Screenshots/Settings%20Light.png" width="19%" alt="Settings (light)" />
+  <img src="Screenshots/Setup%20Light.png" width="19%" alt="Match setup (light)" />
+</p>
+</details>
+
+<details>
+<summary><b>🌙 Dark theme</b> — Home · Stats · Profile · Settings · Setup</summary>
+<br/>
+<p align="center">
+  <img src="Screenshots/Home%20Dark.png" width="19%" alt="Home (dark)" />
+  <img src="Screenshots/Stats%20Dark.png" width="19%" alt="Stats (dark)" />
+  <img src="Screenshots/Profile%20Dark.png" width="19%" alt="Profile (dark)" />
+  <img src="Screenshots/Settings%20Dark.png" width="19%" alt="Settings (dark)" />
+  <img src="Screenshots/Setup%20Dark.png" width="19%" alt="Match setup (dark)" />
+</p>
+</details>
 
 ---
 
