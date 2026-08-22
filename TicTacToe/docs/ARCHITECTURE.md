@@ -16,16 +16,16 @@ function of state.
 
 | Concern              | Choice                                                            |
 | -------------------- | ---------------------------------------------------------------- |
-| Language             | Kotlin 1.9.24                                                     |
-| UI toolkit           | Jetpack Compose (BOM 2024.06.00), Material 3                      |
-| Navigation           | Navigation-Compose 2.7.7                                          |
+| Language             | Kotlin 2.2.10 (provided by AGP's built-in Kotlin — not declared)   |
+| UI toolkit           | Jetpack Compose (BOM 2026.08.00), Material 3                      |
+| Navigation           | Navigation-Compose 2.9.8                                          |
 | Async / reactivity   | Kotlin Coroutines + Flow / StateFlow                             |
 | Architecture pattern | MVVM — ViewModels expose `StateFlow`, Composables render it      |
-| Settings persistence | DataStore (Preferences) 1.1.1                                     |
-| Stats persistence    | Room 2.6.1 (with KSP)                                             |
+| Settings persistence | DataStore (Preferences) 1.2.1                                     |
+| Stats persistence    | Room 2.8.4 (with KSP)                                             |
 | Dependency injection | Manual — a hand-written `AppContainer` (no Hilt/Dagger)          |
-| Build                | Gradle 8.7, Android Gradle Plugin 8.6.0, KSP 1.9.24-1.0.20        |
-| SDK                  | `minSdk 21`, `compileSdk`/`targetSdk 35`, Java 17                |
+| Build                | Gradle 9.7.1, Android Gradle Plugin 9.3.1, KSP 2.2.10-2.0.2       |
+| SDK                  | `minSdk 24`, `compileSdk`/`targetSdk 37`, Java 17 bytecode        |
 | Testing              | JUnit4, kotlinx-coroutines-test, Turbine, Compose UI test        |
 
 The app is **completely offline** — there is no networking dependency and no online play.
@@ -152,6 +152,15 @@ or `home` based on the persisted `hasSeenOnboarding` flag.
 6. **Custom semantic theme.** Material 3's `ColorScheme` covers brand/surface basics; game-specific
    colors (player marks, soft tile backgrounds) live in `TicColors` and are read via
    `TicTacTheme.colors`.
+7. **AGP built-in Kotlin.** From AGP 9 the Kotlin Gradle Plugin is no longer applied by the project
+   — AGP supplies Kotlin itself (2.2.10). There is therefore **no Kotlin version in any build
+   file**; it moves when AGP moves. Compiler settings live in a top-level `kotlin { compilerOptions
+   { … } }` block, not the old `android.kotlinOptions`. The Compose compiler is still applied
+   explicitly (`org.jetbrains.kotlin.plugin.compose`), and its version **must match AGP's Kotlin
+   version** — bump the two together.
+8. **Edge-to-edge system bars.** `MainActivity` calls `enableEdgeToEdge()` and screens apply insets.
+   `window.statusBarColor` / `navigationBarColor` are deliberately *not* set — they are no-ops from
+   API 35 onwards; only bar icon appearance is controlled, in `TicTacTheme`.
 
 ---
 

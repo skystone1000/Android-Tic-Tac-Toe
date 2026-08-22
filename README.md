@@ -79,24 +79,27 @@ The galleries are collapsed to keep this page short — click a row to expand it
 
 ## Tech stack
 
-Kotlin 1.9.24 · Jetpack Compose (BOM 2024.06.00) · Material 3 · Navigation-Compose · Coroutines /
-Flow · MVVM (ViewModel + StateFlow) · Room · DataStore · manual DI. Build: Gradle 8.7 · AGP 8.6.0 ·
-KSP. `minSdk 21`, `targetSdk/compileSdk 35`, Java 17.
+Kotlin 2.2.10 · Jetpack Compose (BOM 2026.08.00) · Material 3 · Navigation-Compose · Coroutines /
+Flow · MVVM (ViewModel + StateFlow) · Room · DataStore · manual DI. Build: Gradle 9.7.1 · AGP 9.3.1 ·
+KSP. `minSdk 24`, `targetSdk/compileSdk 37`, Java 17.
+
+Kotlin ships with AGP ("built-in Kotlin"), so no Kotlin version appears in the build files.
 
 ---
 
 ## Getting started
 
 ### Prerequisites
-- **Android Studio** (latest stable) with the **Android SDK for API 35**.
-- **JDK 17.** Android Studio ships one (its bundled JBR) — you don't need a separate install.
+- **Android Studio** (latest stable) with the **Android SDK for API 37**.
+- **JDK 17 or newer.** Android Studio's bundled JBR is used as-is — you don't need a separate
+  install. Gradle 9.7.1 runs on any JDK from 17 to 26, so a Studio update won't break the build.
 
 ### Open & run
 1. Clone the repo and open the **`TicTacToe/`** directory in Android Studio (it is the Gradle root,
    not the repo root).
 2. Let Gradle sync. Android Studio creates `TicTacToe/local.properties` with your SDK path
    automatically (it's git-ignored).
-3. Run the `app` configuration on an emulator or device (API 21+).
+3. Run the `app` configuration on an emulator or device (API 24+).
 
 ### Command line
 From the `TicTacToe/` directory:

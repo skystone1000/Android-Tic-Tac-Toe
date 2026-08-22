@@ -111,10 +111,10 @@ when instrumented tests are added.
 
 | Path                                   | Purpose                                                        |
 | -------------------------------------- | ------------------------------------------------------------- |
-| `TicTacToe/build.gradle`               | Root: plugin versions (AGP 8.6.0, Kotlin 1.9.24, KSP).        |
+| `TicTacToe/build.gradle`               | Root: plugin versions (AGP 9.3.1, Compose compiler, KSP).     |
 | `TicTacToe/app/build.gradle`           | App module: SDKs, Compose, dependencies.                      |
 | `TicTacToe/settings.gradle`            | Includes `:app`; repositories.                                |
-| `TicTacToe/gradle.properties`          | AndroidX on, JVM args.                                        |
+| `TicTacToe/gradle.properties`          | AndroidX on, JVM args, KSP source-set opt-out (see below).    |
 | `TicTacToe/local.properties`           | Local SDK path (git-ignored, machine-specific).               |
 | `app/src/main/AndroidManifest.xml`     | `.TicTacApp` + single `.MainActivity` launcher.               |
 | `app/src/main/res/values/strings.xml`  | `app_name` = "XOXO".                                          |

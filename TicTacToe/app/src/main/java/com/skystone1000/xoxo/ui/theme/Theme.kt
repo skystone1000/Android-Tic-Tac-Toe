@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
@@ -53,9 +52,9 @@ fun TicTacTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
+            // statusBarColor / navigationBarColor are no-ops from API 35 on; the activity
+            // draws edge-to-edge and applies insets instead. Only bar icon appearance is set here.
             val window = (view.context as Activity).window
-            window.statusBarColor = ticColors.background.toArgb()
-            window.navigationBarColor = ticColors.background.toArgb()
             WindowCompat.getInsetsController(window, view).apply {
                 isAppearanceLightStatusBars = !darkTheme
                 isAppearanceLightNavigationBars = !darkTheme

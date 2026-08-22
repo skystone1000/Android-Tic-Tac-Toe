@@ -23,7 +23,7 @@ import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SmartToy
 import androidx.compose.material.icons.rounded.Vibration
-import androidx.compose.material.icons.rounded.VolumeUp
+import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -74,7 +74,7 @@ fun SettingsScreen(
         Spacer(Modifier.height(6.dp))
         TicCard(cornerRadius = 18, modifier = Modifier.fillMaxWidth()) {
             Column {
-                ToggleRow(Icons.Rounded.VolumeUp, "Sound effects", settings.soundEnabled, onSound)
+                ToggleRow(Icons.AutoMirrored.Rounded.VolumeUp, "Sound effects", settings.soundEnabled, onSound)
                 Divider()
                 ToggleRow(Icons.Rounded.Vibration, "Haptics", settings.hapticsEnabled, onHaptics)
                 Divider()
