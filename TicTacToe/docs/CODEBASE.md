@@ -119,5 +119,5 @@ when instrumented tests are added.
 | `app/src/main/AndroidManifest.xml`     | `.TicTacApp` + single `.MainActivity` launcher.               |
 | `app/src/main/res/values/strings.xml`  | `app_name` = "XOXO".                                          |
 | `app/src/main/res/font/`               | Space Grotesk + Hanken Grotesk variable fonts.                |
-| `app/src/main/res/mipmap-*/`, `drawable*/` | Launcher icons and game art.                              |
+| `app/src/main/res/mipmap-*/`, `drawable/` | Launcher icons only. The board, marks and all game art are drawn in Compose — there are no bitmap assets. |
 | `TicTacToe/docs/`                      | This documentation + `tictactoe-revamp-plan.md` (original build plan). |
