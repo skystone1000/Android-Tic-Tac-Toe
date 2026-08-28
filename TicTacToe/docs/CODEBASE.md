@@ -119,5 +119,8 @@ when instrumented tests are added.
 | `app/src/main/AndroidManifest.xml`     | `.TicTacApp` + single `.MainActivity` launcher.               |
 | `app/src/main/res/values/strings.xml`  | `app_name` = "XOXO".                                          |
 | `app/src/main/res/font/`               | Space Grotesk + Hanken Grotesk variable fonts.                |
-| `app/src/main/res/mipmap-*/`, `drawable/` | Launcher icons only. The board, marks and all game art are drawn in Compose — there are no bitmap assets. |
+| `app/src/main/res/drawable/`           | The three adaptive-icon vector layers: `ic_launcher_foreground` (teal X + orange O), `ic_launcher_background` (flat indigo), `ic_launcher_monochrome` (Android 13+ themed icons). The board, marks and all game art are drawn in Compose — there are no bitmap game assets. |
+| `app/src/main/res/mipmap-anydpi-v26/`  | `ic_launcher.xml` / `ic_launcher_round.xml` — adaptive-icon descriptors; both declare background + foreground + monochrome. |
+| `app/src/main/res/mipmap-*dpi/`        | Legacy launcher PNGs, 48→192 px, square + round.               |
+| `app/src/main/res/drawable-*dpi/`      | `ic_stat_xoxo.png` — notification icon, 24 dp, mdpi→xxxhdpi. **Currently unreferenced**: the app sends no notifications; shipped ahead of that feature. |
 | `TicTacToe/docs/`                      | This documentation + `tictactoe-revamp-plan.md` (original build plan). |

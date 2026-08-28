@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Adaptive-icon foreground: teal X + orange O ring. The mark sits inside the
-     66dp visible circle so it survives circular, squircle and rounded-square masks. -->
+<!-- Adaptive-icon monochrome layer for Android 13+ themed icons. The system tints
+     this layer, so the colour here only needs to be opaque. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
@@ -8,16 +8,16 @@
     android:viewportHeight="108">
     <path
         android:pathData="M34.785,34.785L50.715,50.715"
-        android:strokeColor="#2DD4BF"
+        android:strokeColor="#000000"
         android:strokeWidth="6.525"
         android:strokeLineCap="round" />
     <path
         android:pathData="M50.715,34.785L34.785,50.715"
-        android:strokeColor="#2DD4BF"
+        android:strokeColor="#000000"
         android:strokeWidth="6.525"
         android:strokeLineCap="round" />
     <path
         android:pathData="M65.25,57.2625a7.9875,7.9875 0,1 0,0.001 0z"
-        android:strokeColor="#FB923C"
+        android:strokeColor="#000000"
         android:strokeWidth="6.525" />
 </vector>
