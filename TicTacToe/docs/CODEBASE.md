@@ -123,5 +123,8 @@ when instrumented tests are added.
 | `app/src/main/res/mipmap-anydpi-v26/`  | `ic_launcher.xml` / `ic_launcher_round.xml` — adaptive-icon descriptors; both declare background + foreground + monochrome. |
 | `app/src/main/res/mipmap-*dpi/`        | Legacy launcher PNGs, 48→192 px, square + round.               |
 | `app/src/main/res/drawable-*dpi/`      | `ic_stat_xoxo.png` — notification icon, 24 dp, mdpi→xxxhdpi. **Currently unreferenced**: the app sends no notifications; shipped ahead of that feature. |
+| `Assets/`                              | Every non-code asset, grouped here rather than at the repo root: `play-store/`, `Screenshots/`, `Claude Design/`. Nothing under it is compiled into the app. |
+| `Assets/Screenshots/`                  | App screenshots embedded in the root `README.md`, plus dated capture sets (`2026-08-27/`) and `Old/` for pre-rewrite shots. |
+| `Assets/Claude Design/`                | `TicTac.dc.html` + `support.js` — the reference design file the UI was built from. |
 | `Assets/play-store/`                   | Play Console launch kit. Folders `01-`…`05-` are numbered in Console upload order (icon → feature graphic → screenshots → video → listing text); `_reference/` holds the brand kit and source captures and is never uploaded. All Console text fields are in `05-listing-text/PLAY-CONSOLE-TEXT.md`. Nothing here is compiled into the app. |
 | `TicTacToe/docs/`                      | This documentation + `tictactoe-revamp-plan.md` (original build plan) + `PLAY-STORE-ASSET-PROMPT.md` (ready-to-run prompt for generating the Play Store asset kit; holds the canonical brand/data-safety brief). |

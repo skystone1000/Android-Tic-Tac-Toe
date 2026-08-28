@@ -8,11 +8,11 @@ settings, and a custom design system.
 > The app and package are **XOXO** / `com.skystone1000.xoxo`.
 
 <p align="center">
-  <img src="Screenshots/Home%20Light.png" alt="Home screen" width="30%" />
+  <img src="Assets/Screenshots/Home%20Light.png" alt="Home screen" width="30%" />
   &nbsp;
-  <img src="Screenshots/Board%20Dark.png" alt="Game board (dark)" width="30%" />
+  <img src="Assets/Screenshots/Board%20Dark.png" alt="Game board (dark)" width="30%" />
   &nbsp;
-  <img src="Screenshots/Stats%20Light.png" alt="Stats screen" width="30%" />
+  <img src="Assets/Screenshots/Stats%20Light.png" alt="Stats screen" width="30%" />
 </p>
 
 <p align="center">
@@ -42,11 +42,11 @@ The galleries are collapsed to keep this page short — click a row to expand it
 <summary><b>🎮 Gameplay</b> — board, win &amp; draw</summary>
 <br/>
 <p align="center">
-  <img src="Screenshots/Board%20Light.png" width="19%" alt="Live match" />
-  <img src="Screenshots/Win%20Light.png" width="19%" alt="Victory with confetti" />
-  <img src="Screenshots/Board%20Dark.png" width="19%" alt="Vs AI in dark mode" />
-  <img src="Screenshots/Setup%20Dark.png" width="19%" alt="Match setup (dark)" />
-  <img src="Screenshots/Draw%20Dark.png" width="19%" alt="Draw" />
+  <img src="Assets/Screenshots/Board%20Light.png" width="19%" alt="Live match" />
+  <img src="Assets/Screenshots/Win%20Light.png" width="19%" alt="Victory with confetti" />
+  <img src="Assets/Screenshots/Board%20Dark.png" width="19%" alt="Vs AI in dark mode" />
+  <img src="Assets/Screenshots/Setup%20Dark.png" width="19%" alt="Match setup (dark)" />
+  <img src="Assets/Screenshots/Draw%20Dark.png" width="19%" alt="Draw" />
 </p>
 <p align="center"><sub><b>Live match&nbsp;&nbsp;·&nbsp;&nbsp;Victory + confetti&nbsp;&nbsp;·&nbsp;&nbsp;Vs AI (dark)&nbsp;&nbsp;·&nbsp;&nbsp;Match setup&nbsp;&nbsp;·&nbsp;&nbsp;Draw</b></sub></p>
 </details>
@@ -55,11 +55,11 @@ The galleries are collapsed to keep this page short — click a row to expand it
 <summary><b>☀️ Light theme</b> — Home · Stats · Profile · Settings · Setup</summary>
 <br/>
 <p align="center">
-  <img src="Screenshots/Home%20Light.png" width="19%" alt="Home (light)" />
-  <img src="Screenshots/Stats%20Light.png" width="19%" alt="Stats (light)" />
-  <img src="Screenshots/Profile%20Light.png" width="19%" alt="Profile (light)" />
-  <img src="Screenshots/Settings%20Light.png" width="19%" alt="Settings (light)" />
-  <img src="Screenshots/Setup%20Light.png" width="19%" alt="Match setup (light)" />
+  <img src="Assets/Screenshots/Home%20Light.png" width="19%" alt="Home (light)" />
+  <img src="Assets/Screenshots/Stats%20Light.png" width="19%" alt="Stats (light)" />
+  <img src="Assets/Screenshots/Profile%20Light.png" width="19%" alt="Profile (light)" />
+  <img src="Assets/Screenshots/Settings%20Light.png" width="19%" alt="Settings (light)" />
+  <img src="Assets/Screenshots/Setup%20Light.png" width="19%" alt="Match setup (light)" />
 </p>
 </details>
 
@@ -67,11 +67,11 @@ The galleries are collapsed to keep this page short — click a row to expand it
 <summary><b>🌙 Dark theme</b> — Home · Stats · Profile · Settings · Setup</summary>
 <br/>
 <p align="center">
-  <img src="Screenshots/Home%20Dark.png" width="19%" alt="Home (dark)" />
-  <img src="Screenshots/Stats%20Dark.png" width="19%" alt="Stats (dark)" />
-  <img src="Screenshots/Profile%20Dark.png" width="19%" alt="Profile (dark)" />
-  <img src="Screenshots/Settings%20Dark.png" width="19%" alt="Settings (dark)" />
-  <img src="Screenshots/Setup%20Dark.png" width="19%" alt="Match setup (dark)" />
+  <img src="Assets/Screenshots/Home%20Dark.png" width="19%" alt="Home (dark)" />
+  <img src="Assets/Screenshots/Stats%20Dark.png" width="19%" alt="Stats (dark)" />
+  <img src="Assets/Screenshots/Profile%20Dark.png" width="19%" alt="Profile (dark)" />
+  <img src="Assets/Screenshots/Settings%20Dark.png" width="19%" alt="Settings (dark)" />
+  <img src="Assets/Screenshots/Setup%20Dark.png" width="19%" alt="Match setup (dark)" />
 </p>
 </details>
 
@@ -143,8 +143,10 @@ The original implementation plan is preserved at
 ```
 Android-Tic-Tac-Toe/
 ├── README.md                  ← you are here
-├── Screenshots/ , Assets/     ← marketing/art assets
-├── figma/                     ← reference design
+├── Assets/                    ← everything non-code
+│   ├── play-store/            ← Play Console launch kit, numbered in upload order
+│   ├── Screenshots/           ← app screenshots used in this README
+│   └── Claude Design/         ← reference design file
 └── TicTacToe/                 ← the Gradle project (open THIS in Android Studio)
     ├── app/src/main/java/com/skystone1000/xoxo/
     │   ├── domain/            ← pure game engine + AI + models (unit-tested)
