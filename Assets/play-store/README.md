@@ -22,15 +22,19 @@ built from, kept so a panel can be re-rendered.
 
 ## Before you submit
 
-`05-listing-text/PLAY-CONSOLE-TEXT.md` §8 has **one open decision** — whether to leave
-`android:allowBackup="true"`. It changes no answer on any Console form; it is a product call about
-whether stats survive a device migration. Decide it deliberately.
+`05-listing-text/PLAY-CONSOLE-TEXT.md` §8 asked whether to leave `android:allowBackup="true"`.
+**Decided 2026-08-29: keep it `true`** so stats survive a device migration. It changes no answer on
+any Console form.
 
-Three fields cannot be filled in from this repo and are left as placeholders:
+Two fields cannot be filled in from this repo and are left as placeholders:
 
 - the hosted **privacy policy URL** (required — the app cannot be submitted without it)
-- the **promo video** YouTube URL (optional)
 - the public **contact email** on the listing — pick an address you are willing to publish
+
+The **promo video** YouTube URL is optional and also unfilled.
+
+The full release process — build hardening, signing, pre-flight and Console upload — lives in
+[`TicTacToe/docs/RELEASE-CHECKLIST.md`](../../TicTacToe/docs/RELEASE-CHECKLIST.md).
 
 ## Brand summary
 

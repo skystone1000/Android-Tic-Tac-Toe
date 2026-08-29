@@ -8,7 +8,7 @@ character counts are measured against Play's limits. Ordered to match the Consol
 - **App or game:** Game
 - **Free or paid:** Free
 
-> **One decision is still open before you submit — see [§8](#8-open-decision-before-you-submit).**
+> **Backup behaviour is decided — see [§8](#8-backup-behaviour--decided-).**
 
 ---
 
@@ -207,7 +207,7 @@ Three in a row. Offline.
 
 ---
 
-## 8. Open decision before you submit
+## 8. Backup behaviour — decided ✅
 
 **`android:allowBackup` is currently `true`** — verified in
 `TicTacToe/app/src/main/AndroidManifest.xml:6`. Android Auto Backup can therefore copy the match
@@ -218,14 +218,17 @@ not require declaring it, and the Data safety answer stays "No data collected". 
 description in §1 has already been worded so it is accurate either way — it says the app never
 transmits the data, which is true regardless.
 
-You have two options, and it is a product call, not a compliance one:
+**Decided 2026-08-29: ship v2.0 with `allowBackup="true"`, unchanged.** The streak is the app's
+main reason to come back, so losing match history on a phone upgrade costs more than the OS-level
+backup gains in purity. The data is tiny and non-sensitive, and no answer in this file changes.
 
 | Option | Effect |
 | ------ | ------ |
-| **Leave `allowBackup="true"`** (current) | Stats and settings survive a device migration or reinstall-from-backup. Nothing to change; ship as-is. |
-| **Set `allowBackup="false"`** | "Nothing ever leaves the device" becomes literally true at the OS level too. Cost: users lose their match history and settings when they switch phones. |
+| **`allowBackup="true"`** — *chosen* | Stats and settings survive a device migration or reinstall-from-backup. Nothing to change; ship as-is. |
+| `allowBackup="false"` — rejected | "Nothing ever leaves the device" would become literally true at the OS level too. Cost: users lose their match history and settings when they switch phones. |
 
-Decide before submitting. Nothing else in this file depends on the answer.
+If this is ever revisited, the middle path is to keep `true` but add an explicit
+`dataExtractionRules` XML naming exactly what is backed up.
 
 ---
 

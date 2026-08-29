@@ -20,7 +20,10 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled = false
+            // R8: shrink + obfuscate, then strip unused resources. Keep rules that R8 cannot
+            // infer (Room, enums persisted by name, crash attributes) live in proguard-rules.pro.
+            minifyEnabled = true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

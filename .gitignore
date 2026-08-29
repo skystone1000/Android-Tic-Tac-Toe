@@ -86,3 +86,8 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# Signing — never commit the upload keystore or its passwords (see TicTacToe/docs/RELEASE-CHECKLIST.md §2)
+keystore.properties
+*.jks
+*.keystore
