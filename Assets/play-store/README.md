@@ -14,7 +14,7 @@ All text you have to type into the Console lives in one file:
 | 2 | `02-feature-graphic/` | Store listing → Feature graphic | Upload `feature-graphic-1024x500.jpg` |
 | 3 | `03-phone-screenshots/` | Store listing → Phone screenshots | Upload all 8, in filename order |
 | 4 | `04-promo-video/` | Store listing → Video | Paste a YouTube URL. Shoot it first — `PROMO-VIDEO.md` has the specs and a 30-second shot list. The thumbnails here are for YouTube, not for Play |
-| 5 | `05-listing-text/` | Store listing text, Store settings, App content | Every field, in Console order. Includes the **required** privacy policy — host `PRIVACY-POLICY.md` and paste its URL |
+| 5 | `05-listing-text/` | Store listing text, Store settings, App content | Every field, in Console order. Includes the **required** privacy policy — host `XOXO PRIVACY-POLICY.md` and paste its URL |
 
 `_reference/` is **not uploaded anywhere**: `brand-kit/` holds the logo lockups, splash icons and
 the unused PNG icon layers; `source-screenshots/` holds the retouched raw captures the panels were
@@ -26,12 +26,14 @@ built from, kept so a panel can be re-rendered.
 **Decided 2026-08-29: keep it `true`** so stats survive a device migration. It changes no answer on
 any Console form.
 
-Two fields cannot be filled in from this repo and are left as placeholders:
+One value cannot be filled in from this repo:
 
-- the hosted **privacy policy URL** (required — the app cannot be submitted without it)
-- the public **contact email** on the listing — pick an address you are willing to publish
+- the hosted **privacy policy URL** (required — the app cannot be submitted without it). The
+  policy itself, `05-listing-text/XOXO PRIVACY-POLICY.md`, is complete: it names the publisher and
+  a contact address. It only needs hosting.
 
-The **promo video** YouTube URL is optional and also unfilled.
+The public **contact email** on the listing should match the address the policy already gives.
+The **promo video** YouTube URL is optional and unfilled.
 
 The full release process — build hardening, signing, pre-flight and Console upload — lives in
 [`TicTacToe/docs/RELEASE-CHECKLIST.md`](../../TicTacToe/docs/RELEASE-CHECKLIST.md).
