@@ -234,6 +234,49 @@ If this is ever revisited, the middle path is to keep `true` but add an explicit
 
 ---
 
+## 9. Release — name and notes
+
+Entered on the release itself (Production → Create new release), not in the store listing.
+
+### Release name — internal only, 8 / 50
+
+Play defaults this to the version name of the bundle. Keep the default; users never see it.
+
+```
+2.0 (2)
+```
+
+> The Play *release name* is a Console-side label for you. It is unrelated to the public
+> "What's new" text below, and unrelated to the app name in §1.
+
+### Release notes — first release, 347 / 500
+
+Play shows these under **What's new**. There is no previous version to diff against, so this
+describes the app rather than listing changes.
+
+```
+XOXO is here — tic tac toe, made carefully.
+
+• Pass & Play on one device, or take on the AI
+• Easy, Medium and Hard — Hard is unbeatable
+• Win streaks, win rate and your last 7 days
+• Light, dark or system, plus 3 board themes
+• Built for phones and tablets, either orientation
+• No ads, no accounts, nothing sent anywhere
+
+Good luck beating Hard.
+```
+
+In the Console this goes inside the language tag Play pre-fills:
+
+```
+<en-US>
+...the block above...
+</en-US>
+```
+
+---
+
 ## Verified
 
 Every character count in this file was measured, not estimated:
@@ -244,3 +287,5 @@ Every character count in this file was measured, not estimated:
 | Short description | 80 | **76** |
 | Full description | 4,000 | **1,918** |
 | Alt text, each | 140 | 82–98 |
+| Release name | 50 | **8** |
+| Release notes | 500 | **347** |

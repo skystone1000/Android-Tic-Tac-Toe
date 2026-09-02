@@ -257,7 +257,20 @@ Outputs:
       **Production**.
 - [ ] Upload `app-release.aab`.
 - [ ] Upload `mapping.txt` (App bundle explorer, or automatically with the bundle).
-- [ ] Write the release notes.
+- [ ] **Expected warning — "contains native code, and you've not uploaded debug symbols."**
+      Informational, not a blocker; publish through it. XOXO has no native code of its own. Two
+      AndroidX dependencies ship prebuilt `.so` files: `libandroidx.graphics.path.so`
+      (`androidx.graphics:graphics-path`, pulled in by `compose-ui-graphics`) and
+      `libdatastore_shared_counter.so` (`androidx.datastore`). `release.ndk.debugSymbolLevel` is
+      already set to `SYMBOL_TABLE` in `app/build.gradle`, but it only takes effect once an **NDK
+      is installed** — AGP needs `objcopy`, and without it `extractReleaseNativeSymbolTables`
+      emits nothing and `mergeReleaseNativeDebugMetadata` reports `NO-SOURCE`. Even with the NDK,
+      `graphics-path` is fully stripped (no `.symtab`), so only the DataStore library can
+      contribute symbols. Kotlin/Compose crash deobfuscation does not depend on any of this — the
+      R8 mapping is already inside the bundle at
+      `BUNDLE-METADATA/com.android.tools.build.obfuscation/proguard.map`.
+- [ ] Set the release name and paste the release notes — both are written out in
+      [`PLAY-CONSOLE-TEXT.md`](../../Assets/play-store/05-listing-text/PLAY-CONSOLE-TEXT.md) §9.
 
 **Store listing assets — already built.** Everything lives in
 [`Assets/play-store/`](../../Assets/play-store/README.md), with folders numbered in Console upload
@@ -268,11 +281,13 @@ order. Do not regenerate them; upload what is there.
 | 1 | `01-app-icon/play-icon-512.png` | Store listing → App icon | 512×512, 32-bit PNG w/ alpha, ≤1 MB |
 | 2 | `02-feature-graphic/feature-graphic-1024x500.jpg` | Store listing → Feature graphic | 1024×500, no alpha |
 | 3 | `03-phone-screenshots/` — all, in filename order | Store listing → Phone screenshots | 2–8, 16:9–9:16, 320–3840 px/side |
+| 3 | `03-tablet-screenshots/` — `01`–`08` in one slot, `09`–`11` in the other | Store listing → 7-inch / 10-inch tablet screenshots | max 8 per slot, ratio ≤ 2:1, 320–3840 px/side |
 | 4 | `04-promo-video/` | Store listing → Video | YouTube URL — optional, must be shot first |
 | 5 | `05-listing-text/PLAY-CONSOLE-TEXT.md` | Listing text, Store settings, App content | Every field, in Console order |
 
-`_reference/` is never uploaded. **Tablet screenshots (7" / 10") are not produced yet** — optional,
-but they improve placement on large-screen devices; up to 8 each.
+`_reference/` is never uploaded. **Tablet screenshots are produced** — 11 captures in
+`03-tablet-screenshots/`, dark `01`–`08` and light `09`–`11`. Play caps each tablet slot at 8, so
+split them across the 7" and 10" slots as the table says.
 
 **Store listing text** — pre-written in `05-listing-text/PLAY-CONSOLE-TEXT.md` and already within
 limits: app name ≤ 30 chars · short description ≤ 80 · full description ≤ 4000.
