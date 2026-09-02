@@ -92,9 +92,8 @@ fun TicTacNavHost() {
             SettingsScreen(
                 settings = settings,
                 contentPadding = padding,
-                onSound = vm::setSound,
                 onHaptics = vm::setHaptics,
-                onDarkMode = vm::setDarkMode,
+                onThemeMode = vm::setThemeMode,
                 onDifficulty = vm::setDifficulty,
                 onBoardTheme = vm::setBoardTheme,
             )

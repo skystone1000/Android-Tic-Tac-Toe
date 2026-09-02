@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -32,8 +34,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,7 +52,9 @@ fun ResultDialog(
     onHome: () -> Unit,
 ) {
     Dialog(
-        onDismissRequest = {},
+        // Back gesture leaves the round rather than being swallowed. In landscape the on-screen
+        // controls used to be off-screen too, which left no way out at all.
+        onDismissRequest = onHome,
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -85,6 +87,10 @@ private fun ResultCard(
         modifier = Modifier
             .scale(scale)
             .padding(28.dp)
+            // The weighted buttons below expand to the incoming max width, so without this cap
+            // the "wrap content" card spans the whole window on a tablet.
+            .widthIn(max = 400.dp)
+            .fillMaxWidth()
             .clip(RoundedCornerShape(30.dp))
             .background(colors.card)
             .padding(28.dp),

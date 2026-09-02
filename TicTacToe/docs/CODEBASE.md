@@ -53,14 +53,22 @@
 | `Color.kt`   | `TicColors` semantic palette + `LightTicColors`/`DarkTicColors` + `LocalTicColors`. |
 | `Type.kt`    | Variable-font families (`SpaceGrotesk`, `HankenGrotesk`) + `TicTypography` scale.    |
 | `Shape.kt`   | `TicShapes` corner radii + spacing tokens.                                           |
+| `BoardPalette.kt` | `BoardPalette` + `boardPaletteFor(BoardTheme)` — resolves the user's board-theme choice into the six colors the game screen draws with (board, score cards, turn pill). CLASSIC follows `TicColors`; MIDNIGHT and AURORA are fixed looks. |
 | `Theme.kt`   | `TicTacTheme(darkTheme) { }` wrapper; maps `TicColors` → M3 `ColorScheme`; sets status/nav bar colors; `TicTacTheme.colors` accessor. |
+
+## `ui/layout/` — adaptive layer
+
+| File            | Purpose                                                                       |
+| --------------- | ----------------------------------------------------------------------------- |
+| `WindowSize.kt` | `WidthClass`/`HeightClass`/`WindowSize` + the pure `windowSizeOf()` classifier and the `rememberWindowSize()` composable (reads `LocalWindowInfo`, so it tracks split-screen and foldables). |
+| `Sizing.kt`     | Pure layout maths in bare `Float` dp/sp so it unit-tests on the JVM: `boardSideDp()`, `boardGapDp()`, `tileMarkSp()`, `tileCornerDp()`, and the `MAX_BOARD_SIDE_DP` / `MAX_BOARD_SIDE_LARGE_DP` / `MAX_CONTENT_WIDTH_DP` caps. |
 
 ## `ui/components/` — reusable widgets
 
 | File                  | Public composables                                                          |
 | --------------------- | --------------------------------------------------------------------------- |
-| `GameBoard.kt`        | `GameBoard` — 3×3 grid from a size-9 `List<TileMark>`; highlights winning line. |
-| `GameTile.kt`         | `GameTile` — single cell; `TileMark` enum; X/O/empty/highlighted/enabled states. |
+| `GameBoard.kt`        | `GameBoard` — 3×3 grid from a size-9 `List<TileMark>`; highlights winning line. Sizes itself to the largest square that **fits the box it is given** (capped), so it can never overflow its parent. Takes a `BoardPalette`. |
+| `GameTile.kt`         | `GameTile` — single cell; `TileMark` enum; X/O/empty/highlighted/enabled states. Derives its corner radius and glyph size from its own measured size; takes a `positionLabel` for TalkBack and a `BoardPalette`. |
 | `TicButton.kt`        | `TicButton` (primary, optional leading icon), `TicIconButton`.             |
 | `Common.kt`           | `SectionLabel`, `TicCard`, `TicTopBar`, `IconBadge`.                        |
 | `SegmentedControl.kt` | `SegmentedControl` — used for difficulty pickers.                          |
@@ -70,6 +78,7 @@
 | `Avatar.kt`           | `Avatar` + `AvatarTone` — initial-based rounded avatar.                    |
 | `TurnIndicator.kt`    | `TurnIndicator` — pill showing whose turn / status, with a colored dot.    |
 | `PageIndicator.kt`    | `PageIndicator` — onboarding pager dots.                                   |
+| `ScreenContainer.kt`  | `ScreenContainer` — the shared single-column screen body: paints the background, applies the scaffold padding, scrolls, and centres content capped at `MAX_CONTENT_WIDTH_DP`. |
 
 ## `ui/navigation/`
 
@@ -77,7 +86,7 @@
 | --------------------- | --------------------------------------------------------------------------- |
 | `Destinations.kt`     | `Routes` table + typed arg builders; `HomeTab` enum (bottom-nav tabs).     |
 | `TicTacNavHost.kt`    | The `NavHost` wiring every route to its screen + ViewModel; tab helper and `navigateTab`. |
-| `MainScaffold.kt`     | `Scaffold` + custom bottom bar shared by the four tab screens.             |
+| `MainScaffold.kt`     | `Scaffold` shared by the four tab screens: a custom bottom bar normally, and a left **navigation rail** on expanded-width windows. |
 
 ## `ui/screens/` — one package per screen
 
@@ -101,9 +110,14 @@
 | `domain/engine/GameEngineTest.kt`       | Moves, turn-passing, row/diagonal wins, draw, post-game lockout, reset. |
 | `domain/ai/MinimaxAiTest.kt`            | HARD takes wins / blocks threats / never loses; legal-move guarantee. Uses seeded `Random`. |
 | `data/stats/StatsRepositoryTest.kt`     | Win/loss/draw counts, win-rate, streak logic, last-7-days bucketing. Uses a `FakeMatchDao` + injected clock. |
+| `ui/layout/WindowSizeTest.kt`           | Breakpoint classification for phone/tablet, portrait/landscape, and the two-pane decision. |
+| `ui/layout/SizingTest.kt`               | Board square fitting, the size caps, unbounded-height fallback, gap/mark/corner scaling. |
 
-There is no `androidTest/` source set checked in; the Compose-UI-test dependencies are present for
-when instrumented tests are added.
+### Instrumented tests (`app/src/androidTest/`)
+
+| File                                    | Covers                                                     |
+| --------------------------------------- | ---------------------------------------------------------- |
+| `ui/screens/game/GameScreenSizeTest.kt` | Renders `GameScreen` at five window sizes (phone portrait/landscape, tablet portrait/landscape, narrow split-screen) and asserts every cell and both controls lie **inside** the window. It checks geometric bounds rather than `assertIsDisplayed`, because a `Column` does not clip — an overflowing board still reports its tiles as "displayed". Requires a connected device or emulator. |
 
 ---
 
@@ -112,7 +126,7 @@ when instrumented tests are added.
 | Path                                   | Purpose                                                        |
 | -------------------------------------- | ------------------------------------------------------------- |
 | `TicTacToe/build.gradle`               | Root: plugin versions (AGP 9.3.1, Compose compiler, KSP).     |
-| `TicTacToe/app/build.gradle`           | App module: SDKs, Compose, dependencies. The `release` build type has R8 on (`minifyEnabled` + `shrinkResources`). No `signingConfigs` yet — release builds are unsigned. |
+| `TicTacToe/app/build.gradle`           | App module: SDKs, Compose, dependencies. The `release` build type has R8 on (`minifyEnabled` + `shrinkResources`). No `signingConfigs` yet — release builds are unsigned. Espresso and `test:runner` are pinned explicitly (3.7.0 / 1.7.0): `compose-ui-test-junit4` still resolves espresso 3.5.0, which reflects into a removed `InputManager.getInstance()` and crashes every instrumented test on API 37. |
 | `TicTacToe/app/proguard-rules.pro`     | R8 keep rules: crash attributes (`SourceFile,LineNumberTable`), the whole `data.stats.**` package (Room resolves columns by name), and enum `values()`/`valueOf()`. See `docs/RELEASE-CHECKLIST.md` §1. |
 | `TicTacToe/settings.gradle`            | Includes `:app`; repositories.                                |
 | `TicTacToe/gradle.properties`          | AndroidX on, JVM args, KSP source-set opt-out (see below).    |
@@ -128,5 +142,5 @@ when instrumented tests are added.
 | `Assets/Screenshots/`                  | App screenshots embedded in the root `README.md`, plus dated capture sets (`2026-08-27/`) and `Old/` for pre-rewrite shots. |
 | `Assets/Claude Design/`                | `TicTac.dc.html` + `support.js` — the reference design file the UI was built from. |
 | `Assets/play-store/`                   | Play Console launch kit. Folders `01-`…`05-` are numbered in Console upload order (icon → feature graphic → screenshots → video → listing text); `_reference/` holds the brand kit and source captures and is never uploaded. All Console text fields are in `05-listing-text/PLAY-CONSOLE-TEXT.md`. Nothing here is compiled into the app. |
-| `TicTacToe/docs/`                      | This documentation + `tictactoe-revamp-plan.md` (original build plan) + `PLAY-STORE-ASSET-PROMPT.md` (ready-to-run prompt for generating the Play Store asset kit; holds the canonical brand/data-safety brief) + `RELEASE-CHECKLIST.md`. |
+| `TicTacToe/docs/`                      | This documentation + `tictactoe-revamp-plan.md` (original build plan) + `PLAY-STORE-ASSET-PROMPT.md` (ready-to-run prompt for generating the Play Store asset kit; holds the canonical brand/data-safety brief) + `RELEASE-CHECKLIST.md` + `ADAPTIVE-UI-PLAN.md` (large-screen / landscape / configuration bug analysis and the task-by-task fix plan; **implemented**) + `BACKLOG.md` (deferred work: sound effects, launch-flash). |
 | `TicTacToe/docs/RELEASE-CHECKLIST.md`  | The playbook for shipping an AAB to Play: build hardening (R8 + keep rules), signing setup, per-release pre-flight, build commands, Console upload and policy tasks. Read it before any release. §1 (R8 hardening) is now configured and verified; **§2 signing is still outstanding** — there is no `signingConfigs` block, so release builds are unsigned. |

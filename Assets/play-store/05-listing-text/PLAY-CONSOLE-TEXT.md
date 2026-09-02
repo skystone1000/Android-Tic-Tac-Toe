@@ -102,9 +102,11 @@ nearest matches. Do not add tags for things the app does not do (no "Multiplayer
 **A privacy policy URL is required for every app on Play, including one that collects nothing.**
 There is no exemption for zero-collection apps.
 
-`PRIVACY-POLICY.md`, next to this file, is ready to publish. It must be reachable at a public,
-non-expiring URL before you submit. The cheapest route: enable GitHub Pages on this repo and
-paste the resulting URL into the Console.
+`XOXO PRIVACY-POLICY.md`, next to this file, is complete and ready to publish — it names the
+publisher and a contact address, as the Play User Data policy and GDPR Article 13 both require.
+
+It must be reachable at a public, non-expiring URL before you submit. The cheapest route:
+enable GitHub Pages on this repo and paste the resulting URL into the Console.
 
 ```
 Privacy policy URL:  [paste your hosted URL here before submitting]

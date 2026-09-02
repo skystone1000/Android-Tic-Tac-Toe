@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.skystone1000.xoxo.data.settings.BoardTheme
 import com.skystone1000.xoxo.data.settings.SettingsRepository
 import com.skystone1000.xoxo.data.stats.MatchResult
 import com.skystone1000.xoxo.data.stats.StatsRepository
@@ -32,6 +33,7 @@ data class GameUiState(
     val playerOName: String = "O",
     val isAiThinking: Boolean = false,
     val hapticsEnabled: Boolean = true,
+    val boardTheme: BoardTheme = BoardTheme.CLASSIC,
 )
 
 class GameViewModel(
@@ -54,7 +56,12 @@ class GameViewModel(
 
     init {
         settingsRepository.settings
-            .onEach { s -> _ui.value = _ui.value.copy(hapticsEnabled = s.hapticsEnabled) }
+            .onEach { s ->
+                _ui.value = _ui.value.copy(
+                    hapticsEnabled = s.hapticsEnabled,
+                    boardTheme = s.boardTheme,
+                )
+            }
             .launchIn(viewModelScope)
         maybeAiOpening()
     }

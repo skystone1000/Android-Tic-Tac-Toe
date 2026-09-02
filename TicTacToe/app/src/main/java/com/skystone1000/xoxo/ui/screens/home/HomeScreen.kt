@@ -2,20 +2,16 @@ package com.skystone1000.xoxo.ui.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material.icons.rounded.Groups
@@ -27,8 +23,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,6 +38,7 @@ import com.skystone1000.xoxo.domain.model.Difficulty
 import com.skystone1000.xoxo.ui.components.Avatar
 import com.skystone1000.xoxo.ui.components.AvatarTone
 import com.skystone1000.xoxo.ui.components.IconBadge
+import com.skystone1000.xoxo.ui.components.ScreenContainer
 import com.skystone1000.xoxo.ui.components.SectionLabel
 import com.skystone1000.xoxo.ui.components.SegmentedControl
 import com.skystone1000.xoxo.ui.components.TicButton
@@ -59,15 +56,13 @@ fun HomeScreen(
     onOpenProfile: () -> Unit,
 ) {
     val colors = TicTacTheme.colors
-    var difficulty by remember(state.defaultDifficulty) { mutableStateOf(state.defaultDifficulty) }
+    // Saveable: the picked difficulty used to reset to the default on every rotation.
+    var difficultyOrdinal by rememberSaveable(state.defaultDifficulty) {
+        mutableIntStateOf(state.defaultDifficulty.ordinal)
+    }
+    val difficulty = Difficulty.entries[difficultyOrdinal]
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(contentPadding)
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 22.dp, vertical = 8.dp),
-    ) {
+    ScreenContainer(contentPadding = contentPadding) {
         // Header
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
@@ -145,7 +140,7 @@ fun HomeScreen(
                 SegmentedControl(
                     options = listOf("Easy", "Medium", "Hard"),
                     selectedIndex = difficulty.ordinal,
-                    onSelect = { difficulty = Difficulty.entries[it] },
+                    onSelect = { difficultyOrdinal = it },
                 )
                 Spacer(Modifier.height(12.dp))
                 TicButton(text = "Play vs AI", onClick = { onVsAi(difficulty) }, modifier = Modifier.fillMaxWidth())

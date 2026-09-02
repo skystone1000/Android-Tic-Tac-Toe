@@ -277,17 +277,24 @@ but they improve placement on large-screen devices; up to 8 each.
 **Store listing text** — pre-written in `05-listing-text/PLAY-CONSOLE-TEXT.md` and already within
 limits: app name ≤ 30 chars · short description ≤ 80 · full description ≤ 4000.
 
-**Three placeholders must be filled before submitting:**
-- [ ] **Privacy policy URL** — required; the app cannot be submitted without it. Host
-      `05-listing-text/PRIVACY-POLICY.md` (GitHub Pages works) and paste the URL.
-- [ ] **Public contact email** — pick an address you are willing to publish.
+**Two values must be set before submitting:**
+- [ ] **Privacy policy URL** — required; the app cannot be submitted without it.
+      `05-listing-text/XOXO PRIVACY-POLICY.md` is complete (it names the publisher and a contact
+      address, as the Play User Data policy and GDPR Art. 13 require). Host it — GitHub Pages
+      works — and paste the URL. Note the filename contains a space, so a GitHub Pages URL will
+      encode it as `%20`; rename the file if you want a cleaner URL.
+- [ ] **Public contact email** — the listing field; use the same address the policy gives.
 - [ ] **Promo video URL** — optional; leave blank if unshot.
 
 **Play policy tasks** (first release, or whenever the answer changes):
 - [ ] **Data Safety** — XOXO collects and transmits **nothing**: no permissions, no network, no
       account. Answer accordingly, and re-check it if a dependency ever adds a permission.
 - [ ] **Content rating** questionnaire — trivial for an offline board game; expect Everyone / PEGI 3.
-- [ ] **Target audience & content** — declare whether children are a target audience.
+- [ ] **Target audience & content** — declare whether children are a target audience. Either
+      answer is consistent with the privacy policy, which states the app collects nothing from
+      anyone including children; if you do include children's age bands, the **Play Families
+      policy** applies (no ads, no data collection, policy linked in the Families section — all
+      already true).
 - [ ] **Ads declaration** — no ads.
 - [ ] **App access** — no login; all functionality is available without restrictions.
 - [ ] **Government apps / financial features / health** — all "no".
@@ -325,8 +332,8 @@ cd TicTacToe
 | 2 | Keep rules unwritten — enums are persisted and routed **by name** | §1 | ✅ done |
 | 3 | No `signingConfigs` → the AAB is unsigned and Play rejects it | §2 | ⬜ open |
 | 4 | `keystore.properties` / `*.jks` not gitignored | §2 | ✅ done |
-| 5 | Privacy policy is written but not hosted — no URL to paste | §6 | ⬜ open |
-| 6 | Public contact email not chosen | §6 | ⬜ open |
+| 5 | Privacy policy — placeholders unfilled, not hosted, no URL | §6 | ⬜ open |
+| 6 | Public contact email / developer name not chosen | §6 | ⬜ open |
 | 7 | `allowBackup` decision | §3 | ✅ decided — keep `true` |
 
 **Pre-flight run of 2026-08-29** (§3): `./gradlew test` passed (`GameEngineTest`, `MinimaxAiTest`,

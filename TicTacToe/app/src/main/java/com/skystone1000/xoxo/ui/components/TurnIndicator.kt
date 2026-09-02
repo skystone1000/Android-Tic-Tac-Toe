@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.skystone1000.xoxo.ui.theme.TicTacTheme
 
@@ -39,6 +40,12 @@ fun TurnIndicator(
                 .clip(CircleShape)
                 .background(dotColor),
         )
-        Text(text, style = MaterialTheme.typography.titleMedium, color = colors.ink)
+        Text(
+            text,
+            style = MaterialTheme.typography.titleMedium,
+            color = colors.ink,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
     }
 }

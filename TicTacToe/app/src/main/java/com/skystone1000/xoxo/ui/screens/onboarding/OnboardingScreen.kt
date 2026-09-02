@@ -13,7 +13,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -37,6 +40,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.skystone1000.xoxo.ui.layout.MAX_CONTENT_WIDTH_DP
+import com.skystone1000.xoxo.ui.layout.rememberWindowSize
 import com.skystone1000.xoxo.ui.components.PageIndicator
 import com.skystone1000.xoxo.ui.components.TicButton
 import com.skystone1000.xoxo.ui.theme.TicTacTheme
@@ -57,9 +62,12 @@ fun OnboardingScreen(onFinish: () -> Unit) {
     val pagerState = rememberPagerState(pageCount = { pages.size })
     val scope = rememberCoroutineScope()
     val isLast = pagerState.currentPage == pages.lastIndex
+    val windowSize = rememberWindowSize()
+    // The 200dp illustration does not fit a ~411dp-tall landscape phone alongside the copy.
+    val artSize = if (windowSize.isCompactHeight) 120.dp else 200.dp
 
     Box(Modifier.fillMaxSize().background(colors.background)) {
-        Column(Modifier.fillMaxSize().systemBarsPadding()) {
+        Column(Modifier.fillMaxSize().safeDrawingPadding()) {
             Text(
                 "Skip",
                 style = MaterialTheme.typography.labelLarge,
@@ -72,35 +80,47 @@ fun OnboardingScreen(onFinish: () -> Unit) {
             HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { index ->
                 val page = pages[index]
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(horizontal = 30.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        // Centred when it fits, scrollable when it does not.
+                        .verticalScroll(rememberScrollState())
+                        .padding(horizontal = 30.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
                 ) {
                     Box(
                         modifier = Modifier
-                            .size(200.dp)
-                            .clip(RoundedCornerShape(48.dp))
+                            .size(artSize)
+                            .clip(RoundedCornerShape(artSize * 0.24f))
                             .background(Brush.linearGradient(listOf(colors.primaryContainer, colors.playerXSoft))),
                         contentAlignment = Alignment.Center,
                     ) {
-                        Icon(page.icon, contentDescription = null, tint = colors.primary, modifier = Modifier.size(88.dp))
+                        Icon(page.icon, contentDescription = null, tint = colors.primary, modifier = Modifier.size(artSize * 0.44f))
                     }
-                    Spacer(Modifier.height(36.dp))
-                    Text(page.title, style = MaterialTheme.typography.headlineMedium, color = colors.ink)
+                    Spacer(Modifier.height(if (windowSize.isCompactHeight) 20.dp else 36.dp))
+                    Text(
+                        page.title,
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = colors.ink,
+                        textAlign = TextAlign.Center,
+                    )
                     Spacer(Modifier.height(10.dp))
                     Text(
                         page.body,
                         style = MaterialTheme.typography.bodyLarge,
                         color = colors.inkMuted,
                         textAlign = TextAlign.Center,
+                        modifier = Modifier.widthIn(max = MAX_CONTENT_WIDTH_DP.dp),
                     )
                 }
             }
 
             Row(
                 modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .widthIn(max = MAX_CONTENT_WIDTH_DP.dp)
                     .fillMaxWidth()
-                    .padding(horizontal = 30.dp, vertical = 36.dp),
+                    .padding(horizontal = 30.dp, vertical = if (windowSize.isCompactHeight) 18.dp else 36.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
