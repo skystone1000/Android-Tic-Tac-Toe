@@ -377,7 +377,7 @@ private fun statusPill(
         }
         is GameStatus.Won -> {
             val name = if (s.player == Player.X) state.playerXName else state.playerOName
-            "$name completes a row!" to (if (s.player == Player.X) palette.markX else palette.markO)
+            "$name got three in a row!" to (if (s.player == Player.X) palette.markX else palette.markO)
         }
         GameStatus.Draw -> "It's a draw" to colors.inkFaint
     }
