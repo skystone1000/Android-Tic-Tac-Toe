@@ -13,6 +13,7 @@ All text you have to type into the Console lives in one file:
 | 1 | `01-app-icon/` | Store listing → App icon | Upload `play-icon-512.png` |
 | 2 | `02-feature-graphic/` | Store listing → Feature graphic | Upload `feature-graphic-1024x500.jpg` |
 | 3 | `03-phone-screenshots/` | Store listing → Phone screenshots | Upload all 8, in filename order |
+| 3 | `03-tablet-screenshots/` | Store listing → 7-inch / 10-inch tablet screenshots | 11 captures, 2560×1600 landscape and 1600×2560 portrait. Play allows **max 8 per slot**: `01`–`08` (dark) are the primary set, `09`–`11` (light) are spares or fill the other tablet slot |
 | 4 | `04-promo-video/` | Store listing → Video | Paste a YouTube URL. Shoot it first — `PROMO-VIDEO.md` has the specs and a 30-second shot list. The thumbnails here are for YouTube, not for Play |
 | 5 | `05-listing-text/` | Store listing text, Store settings, App content | Every field, in Console order. Includes the **required** privacy policy — host `XOXO PRIVACY-POLICY.md` and paste its URL |
 
@@ -90,6 +91,7 @@ byte size — not assumed.
 | `play-icon-512.png` | 512×512, 32-bit PNG, ≤ 1 MB | 512×512, 11.6 KB | present, 100% opaque |
 | `feature-graphic-1024x500.jpg` | 1024×500, no alpha, ≤ 15 MB | 1024×500, 60 KB | none (JPEG) |
 | `03-phone-screenshots/*.jpg` (8) | 1080×1920, no alpha, ≤ 8 MB each | all 1080×1920, 159–200 KB | none (JPEG) |
+| `03-tablet-screenshots/*.jpg` (11) | 320–3840 px per side, ratio ≤ 2:1, no alpha, ≤ 8 MB each | 2560×1600 / 1600×2560, ratio 1.60, 69–145 KB | none (JPEG) |
 | `youtube-landscape-1280x720-UPLOAD.jpg` | 1280×720, ≤ 2 MB | 1280×720, 122 KB | none (JPEG) |
 | `youtube-shorts-1080x1920.jpg` | 1080×1920 | 1080×1920, 187 KB | none (JPEG) |
 | Icon layers (432 px, `_reference`) | 432×432 | 432×432 | fg/mono transparent, bg opaque |
