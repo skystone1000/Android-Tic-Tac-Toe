@@ -9,21 +9,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.DarkMode
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SmartToy
 import androidx.compose.material.icons.rounded.Vibration
-import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,47 +37,53 @@ import com.skystone1000.xoxo.data.settings.BoardTheme
 import com.skystone1000.xoxo.data.settings.ThemeMode
 import com.skystone1000.xoxo.domain.model.Difficulty
 import com.skystone1000.xoxo.ui.components.NavRow
+import com.skystone1000.xoxo.ui.components.ScreenContainer
 import com.skystone1000.xoxo.ui.components.SectionLabel
 import com.skystone1000.xoxo.ui.components.SegmentedControl
 import com.skystone1000.xoxo.ui.components.TicCard
 import com.skystone1000.xoxo.ui.components.ToggleRow
 import com.skystone1000.xoxo.ui.theme.SpaceGrotesk
 import com.skystone1000.xoxo.ui.theme.TicTacTheme
+import com.skystone1000.xoxo.ui.theme.boardPaletteFor
 
 @Composable
 fun SettingsScreen(
     settings: AppSettings,
     contentPadding: PaddingValues,
-    onSound: (Boolean) -> Unit,
     onHaptics: (Boolean) -> Unit,
-    onDarkMode: (Boolean) -> Unit,
+    onThemeMode: (ThemeMode) -> Unit,
     onDifficulty: (Difficulty) -> Unit,
     onBoardTheme: (BoardTheme) -> Unit,
 ) {
     val colors = TicTacTheme.colors
-    Column(
-        Modifier
-            .fillMaxSize()
-            .background(colors.background)
-            .padding(contentPadding)
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 22.dp, vertical = 8.dp),
-    ) {
+    ScreenContainer(contentPadding = contentPadding) {
         Text("Settings", fontFamily = SpaceGrotesk, fontWeight = FontWeight.Bold, fontSize = 24.sp, color = colors.ink)
         Spacer(Modifier.height(14.dp))
 
         SectionLabel("General")
         Spacer(Modifier.height(6.dp))
+        // Sound effects: the setting is still persisted (AppSettings.soundEnabled) but the row is
+        // hidden until real audio assets land in res/raw. A switch that does nothing is worse
+        // than no switch. See docs/ADAPTIVE-UI-PLAN.md 1.14 and docs/BACKLOG.md.
         TicCard(cornerRadius = 18, modifier = Modifier.fillMaxWidth()) {
             Column {
-                ToggleRow(Icons.AutoMirrored.Rounded.VolumeUp, "Sound effects", settings.soundEnabled, onSound)
-                Divider()
                 ToggleRow(Icons.Rounded.Vibration, "Haptics", settings.hapticsEnabled, onHaptics)
                 Divider()
-                ToggleRow(
-                    Icons.Rounded.DarkMode, "Dark mode",
-                    settings.themeMode == ThemeMode.DARK, onDarkMode,
-                )
+                // Three-way, so ThemeMode.SYSTEM stays reachable. The old boolean switch mapped
+                // only to LIGHT/DARK, making "follow system" a one-way door.
+                Column(Modifier.padding(16.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Rounded.DarkMode, contentDescription = null, tint = colors.primary, modifier = Modifier.size(22.dp))
+                        Spacer(Modifier.size(14.dp))
+                        Text("Appearance", style = MaterialTheme.typography.bodyLarge, color = colors.ink)
+                    }
+                    Spacer(Modifier.height(12.dp))
+                    SegmentedControl(
+                        options = listOf("System", "Light", "Dark"),
+                        selectedIndex = settings.themeMode.ordinal,
+                        onSelect = { onThemeMode(ThemeMode.entries[it]) },
+                    )
+                }
             }
         }
 
@@ -114,9 +116,21 @@ fun SettingsScreen(
                 }
                 Spacer(Modifier.height(12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    BoardThemeSwatch(BoardTheme.CLASSIC, settings.boardTheme, Brush.linearGradient(listOf(colors.playerXSoft, colors.playerOSoft))) { onBoardTheme(it) }
-                    BoardThemeSwatch(BoardTheme.MIDNIGHT, settings.boardTheme, Brush.linearGradient(listOf(Color(0xFF16162A), Color(0xFF23232E)))) { onBoardTheme(it) }
-                    BoardThemeSwatch(BoardTheme.AURORA, settings.boardTheme, Brush.linearGradient(listOf(colors.primaryContainer, Color(0xFFFFFFFF)))) { onBoardTheme(it) }
+                    // Previews are built from the real palettes, so a swatch can never misrepresent
+                    // the board it selects.
+                    BoardTheme.entries.forEach { theme ->
+                        val palette = boardPaletteFor(theme)
+                        BoardThemeSwatch(
+                            theme = theme,
+                            selected = settings.boardTheme,
+                            // markX/tile/markO: the X colour, the tile surface and the O colour,
+                            // so each swatch reads as the board it actually selects.
+                            brush = Brush.linearGradient(
+                                listOf(palette.markX, palette.tile, palette.markO),
+                            ),
+                            onClick = { onBoardTheme(it) },
+                        )
+                    }
                 }
             }
         }
@@ -150,11 +164,18 @@ private fun BoardThemeSwatch(
 ) {
     val isSelected = theme == selected
     Box(
+        // 48dp interactive box around a 42dp swatch — the swatch alone was under the minimum.
         Modifier
-            .size(42.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(brush)
-            .border(2.dp, if (isSelected) TicTacTheme.colors.primary else Color.Transparent, RoundedCornerShape(12.dp))
+            .size(48.dp)
             .clickable { onClick(theme) },
-    )
+        contentAlignment = Alignment.Center,
+    ) {
+        Box(
+            Modifier
+                .size(42.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(brush)
+                .border(2.dp, if (isSelected) TicTacTheme.colors.primary else Color.Transparent, RoundedCornerShape(12.dp)),
+        )
+    }
 }

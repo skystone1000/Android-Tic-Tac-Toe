@@ -8,15 +8,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Group
 import androidx.compose.material.icons.rounded.LocalFireDepartment
@@ -30,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.skystone1000.xoxo.data.stats.MatchEntity
@@ -37,6 +35,7 @@ import com.skystone1000.xoxo.data.stats.MatchResult
 import com.skystone1000.xoxo.data.stats.StatsSummary
 import com.skystone1000.xoxo.domain.model.GameMode
 import com.skystone1000.xoxo.ui.components.IconBadge
+import com.skystone1000.xoxo.ui.components.ScreenContainer
 import com.skystone1000.xoxo.ui.components.SectionLabel
 import com.skystone1000.xoxo.ui.components.TicCard
 import com.skystone1000.xoxo.ui.theme.SpaceGrotesk
@@ -45,14 +44,7 @@ import com.skystone1000.xoxo.ui.theme.TicTacTheme
 @Composable
 fun StatsScreen(summary: StatsSummary, contentPadding: PaddingValues) {
     val colors = TicTacTheme.colors
-    Column(
-        Modifier
-            .fillMaxSize()
-            .background(colors.background)
-            .padding(contentPadding)
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 22.dp, vertical = 8.dp),
-    ) {
+    ScreenContainer(contentPadding = contentPadding) {
         Text("Your stats", fontFamily = SpaceGrotesk, fontWeight = FontWeight.Bold, fontSize = 24.sp, color = colors.ink)
         Spacer(Modifier.height(16.dp))
 
@@ -161,7 +153,10 @@ private fun MatchRow(match: MatchEntity) {
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
                 val title = if (isAi) "Vs AI · ${match.difficulty?.lowercase()?.replaceFirstChar { it.uppercase() } ?: ""}" else "Pass & Play"
-                Text(title, style = MaterialTheme.typography.titleMedium, color = colors.ink)
+                Text(
+                    title, style = MaterialTheme.typography.titleMedium, color = colors.ink,
+                    maxLines = 1, overflow = TextOverflow.Ellipsis,
+                )
             }
             Text(
                 chipText,

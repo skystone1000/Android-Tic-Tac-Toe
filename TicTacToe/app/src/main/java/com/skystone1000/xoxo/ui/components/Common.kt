@@ -68,13 +68,17 @@ fun TicTopBar(
     ) {
         if (onBack != null) {
             Box(
+                // 48dp minimum touch target; the glyph inside stays 24dp.
                 Modifier
+                    .size(48.dp)
                     .clip(CircleShape)
-                    .clickable(onClick = onBack)
-                    .size(28.dp),
+                    .clickable(onClick = onBack),
                 contentAlignment = Alignment.Center,
             ) {
-                Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back", tint = colors.ink)
+                Icon(
+                    Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back",
+                    tint = colors.ink, modifier = Modifier.size(24.dp),
+                )
             }
         }
         Text(

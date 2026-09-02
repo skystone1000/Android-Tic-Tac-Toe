@@ -89,7 +89,11 @@ MVVM with Compose.
   exposed as `TicTacTheme.colors`), Material 3 color schemes derived from it, variable-font
   typography (Space Grotesk + Hanken Grotesk), and shapes.
 - **`components/`** — the reusable, screen-agnostic component library (buttons, board, tiles,
-  cards, segmented control, dialogs, confetti, avatars, etc.).
+  cards, segmented control, dialogs, confetti, avatars, `ScreenContainer`, etc.).
+- **`layout/`** — the adaptive layer. `rememberWindowSize()` classifies the current *window* into
+  Material width/height buckets, and `Sizing.kt` holds the pure sizing maths (board square,
+  gaps, glyph sizes, content-width caps). Screens branch on the window size instead of assuming a
+  single phone-width column. Both files are unit-tested on the JVM.
 - **`navigation/`** — the route table (`Routes`), the `NavHost` (`TicTacNavHost`), and the
   bottom-bar scaffold (`MainScaffold`) used by the four tab screens.
 - **`screens/`** — one package per screen. Each has a `*Screen.kt` Composable and, where it needs
@@ -158,7 +162,20 @@ or `home` based on the persisted `hasSeenOnboarding` flag.
    { … } }` block, not the old `android.kotlinOptions`. The Compose compiler is still applied
    explicitly (`org.jetbrains.kotlin.plugin.compose`), and its version **must match AGP's Kotlin
    version** — bump the two together.
-8. **Edge-to-edge system bars.** `MainActivity` calls `enableEdgeToEdge()` and screens apply insets.
+8. **Adaptive by window, not by device.** Layout branches on the current *window* size class, read
+   from `LocalWindowInfo` via `rememberWindowSize()` — so split-screen, foldables and desktop
+   windowing behave correctly, not just "phone vs tablet". Concretely: single-column content is
+   capped at `MAX_CONTENT_WIDTH_DP` (560dp) and centred; the board is the largest square that fits
+   its box, capped at 420dp (compact) / 520dp (larger); the game screen switches to a two-pane
+   layout when height is compact or width is expanded; and the bottom bar becomes a navigation rail
+   at expanded width. The board must always be given a **bounded** box — that is what stops it
+   overflowing the way the old `fillMaxWidth()` board did.
+9. **Landscape is mandatory.** With `targetSdk 37`, Android ignores orientation and resizability
+   restrictions on large screens, so the app cannot opt out of landscape or multi-window. Every
+   screen scrolls or adapts rather than assuming a tall portrait window, and screens use
+   `safeDrawingPadding()` (not `systemBarsPadding()`) because the display cutout sits on a side
+   edge in landscape.
+10. **Edge-to-edge system bars.** `MainActivity` calls `enableEdgeToEdge()` and screens apply insets.
    `window.statusBarColor` / `navigationBarColor` are deliberately *not* set — they are no-ops from
    API 35 onwards; only bar icon appearance is controlled, in `TicTacTheme`.
 
@@ -173,6 +190,8 @@ or `home` based on the persisted `hasSeenOnboarding` flag.
 | A new persisted setting            | `data/settings/AppSettings.kt` + `SettingsRepository.kt`      |
 | What a "match" stores / stat math  | `data/stats/MatchEntity.kt` + `StatsRepository.kt`            |
 | Colors, fonts, shapes              | `ui/theme/*`                                                   |
+| Board colors per board-theme       | `ui/theme/BoardPalette.kt`                                     |
+| Breakpoints / adaptive rules       | `ui/layout/*`                                                  |
 | A reusable widget                  | `ui/components/*`                                              |
 | A screen's layout                  | `ui/screens/<screen>/<Screen>.kt`                             |
 | A screen's state/logic             | `ui/screens/<screen>/<Screen>ViewModel.kt`                    |

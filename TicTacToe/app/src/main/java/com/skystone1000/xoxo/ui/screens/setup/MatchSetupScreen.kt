@@ -2,6 +2,8 @@ package com.skystone1000.xoxo.ui.screens.setup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,7 +16,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -25,19 +28,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.skystone1000.xoxo.domain.model.Difficulty
 import com.skystone1000.xoxo.domain.model.GameMode
 import com.skystone1000.xoxo.domain.model.Player
+import com.skystone1000.xoxo.ui.layout.MAX_CONTENT_WIDTH_DP
 import com.skystone1000.xoxo.ui.components.SectionLabel
 import com.skystone1000.xoxo.ui.components.SegmentedControl
 import com.skystone1000.xoxo.ui.components.TicButton
@@ -54,23 +59,36 @@ fun MatchSetupScreen(
     onBack: () -> Unit,
 ) {
     val colors = TicTacTheme.colors
-    var symbol by remember { mutableStateOf(Player.X) }
-    var difficulty by remember { mutableStateOf(initialDifficulty) }
+    // Saveable: rotating used to silently reset both choices back to X / the default.
+    var symbolOrdinal by rememberSaveable { mutableIntStateOf(Player.X.ordinal) }
+    var difficultyOrdinal by rememberSaveable { mutableIntStateOf(initialDifficulty.ordinal) }
+    val symbol = Player.entries[symbolOrdinal]
+    val difficulty = Difficulty.entries[difficultyOrdinal]
 
-    Column(Modifier.fillMaxSize().background(colors.background).systemBarsPadding()) {
-        TicTopBar(title = "Match setup", onBack = onBack)
+    Column(
+        Modifier.fillMaxSize().background(colors.background).safeDrawingPadding(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        TicTopBar(
+            title = "Match setup",
+            onBack = onBack,
+            modifier = Modifier.widthIn(max = MAX_CONTENT_WIDTH_DP.dp).fillMaxWidth(),
+        )
 
         Column(
             modifier = Modifier
                 .weight(1f)
+                .widthIn(max = MAX_CONTENT_WIDTH_DP.dp)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 22.dp),
         ) {
             Spacer(Modifier.height(8.dp))
             SectionLabel("Your symbol")
             Spacer(Modifier.height(10.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                SymbolChoice("X", colors.playerX, colors.playerXSoft, symbol == Player.X, Modifier.weight(1f)) { symbol = Player.X }
-                SymbolChoice("O", colors.playerO, colors.playerOSoft, symbol == Player.O, Modifier.weight(1f)) { symbol = Player.O }
+                SymbolChoice("X", colors.playerX, colors.playerXSoft, symbol == Player.X, Modifier.weight(1f)) { symbolOrdinal = Player.X.ordinal }
+                SymbolChoice("O", colors.playerO, colors.playerOSoft, symbol == Player.O, Modifier.weight(1f)) { symbolOrdinal = Player.O.ordinal }
             }
 
             if (mode == GameMode.VS_AI) {
@@ -80,7 +98,7 @@ fun MatchSetupScreen(
                 SegmentedControl(
                     options = listOf("Easy", "Medium", "Hard"),
                     selectedIndex = difficulty.ordinal,
-                    onSelect = { difficulty = Difficulty.entries[it] },
+                    onSelect = { difficultyOrdinal = it },
                 )
             }
 
@@ -106,6 +124,7 @@ fun MatchSetupScreen(
             onClick = { onStart(symbol, difficulty) },
             leadingIcon = Icons.Rounded.PlayArrow,
             modifier = Modifier
+                .widthIn(max = MAX_CONTENT_WIDTH_DP.dp)
                 .fillMaxWidth()
                 .padding(horizontal = 22.dp, vertical = 24.dp),
         )
@@ -123,7 +142,10 @@ private fun SymbolChoice(
 ) {
     Box(
         modifier = modifier
-            .height(88.dp)
+            // Square, so it stays a "tile" at every width instead of a 600x88 letterbox.
+            // Its size is bounded by the screen's MAX_CONTENT_WIDTH_DP cap, not by a height limit
+            // (aspectRatio measures from the width, so a heightIn here would never apply).
+            .aspectRatio(1f)
             .clip(RoundedCornerShape(20.dp))
             .background(if (selected) soft else TicTacTheme.colors.card)
             .border(2.dp, if (selected) color else TicTacTheme.colors.outline, RoundedCornerShape(20.dp))
@@ -155,7 +177,10 @@ private fun PlayerRow(
                 }
             }
             Spacer(Modifier.width(12.dp))
-            Text(label, style = MaterialTheme.typography.titleMedium, color = colors.ink, modifier = Modifier.weight(1f))
+            Text(
+                label, style = MaterialTheme.typography.titleMedium, color = colors.ink,
+                modifier = Modifier.weight(1f), maxLines = 1, overflow = TextOverflow.Ellipsis,
+            )
             Text(symbolText, fontFamily = SpaceGrotesk, fontWeight = FontWeight.Bold, color = symbolColor)
         }
     }

@@ -22,9 +22,7 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
 
     fun setSound(enabled: Boolean) = viewModelScope.launch { repository.setSound(enabled) }
     fun setHaptics(enabled: Boolean) = viewModelScope.launch { repository.setHaptics(enabled) }
-    fun setDarkMode(dark: Boolean) = viewModelScope.launch {
-        repository.setThemeMode(if (dark) ThemeMode.DARK else ThemeMode.LIGHT)
-    }
+    fun setThemeMode(mode: ThemeMode) = viewModelScope.launch { repository.setThemeMode(mode) }
     fun setDifficulty(d: Difficulty) = viewModelScope.launch { repository.setDefaultDifficulty(d) }
     fun setBoardTheme(t: BoardTheme) = viewModelScope.launch { repository.setBoardTheme(t) }
 
