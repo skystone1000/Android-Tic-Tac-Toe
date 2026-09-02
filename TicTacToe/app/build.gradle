@@ -25,6 +25,17 @@ android {
             minifyEnabled = true
             shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Play warns that the bundle carries native code with no debug symbols. The app has
+            // no native code of its own; the .so files come from two AndroidX deps — graphics-path
+            // (via compose-ui-graphics) and datastore's shared counter. SYMBOL_TABLE is the right
+            // level: neither library ships DWARF, so FULL would add nothing.
+            //
+            // NOTE: this is a no-op until an NDK is installed — AGP needs objcopy to extract the
+            // tables, and with no NDK `extractReleaseNativeSymbolTables` silently emits nothing.
+            // graphics-path is fully stripped (no .symtab) so it can never yield symbols anyway;
+            // only datastore's lib has a table. Kotlin crash deobfuscation is unaffected — the
+            // R8 mapping already ships in the bundle. See docs/RELEASE-CHECKLIST.md.
+            ndk { debugSymbolLevel = 'SYMBOL_TABLE' }
         }
     }
     compileOptions {
